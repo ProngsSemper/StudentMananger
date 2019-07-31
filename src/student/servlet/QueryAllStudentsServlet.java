@@ -28,6 +28,6 @@ public class QueryAllStudentsServlet extends HttpServlet {
         List<Student> students = studentService.queryAllStudents();
         System.out.println(students);
         request.setAttribute("students", students);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("administrator.jsp").forward(request, response);
     }
 }

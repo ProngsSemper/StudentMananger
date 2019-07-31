@@ -40,6 +40,6 @@ public class QueryStudentByPageServlet extends HttpServlet {
         System.out.println(count);
         page.setStudents(students);
         request.setAttribute("page",page);
-        request.getRequestDispatcher("index.jsp").forward(request,response);
+        request.getRequestDispatcher("administrator.jsp").forward(request,response);
     }
 }
