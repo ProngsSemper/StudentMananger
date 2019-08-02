@@ -1,25 +1,38 @@
 package student.util;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import student.entity.Student;
 
+import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBUtil {
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/jdbcdemo";
-    private static final String NAME = "root";
-    private static final String PASSWORD = "huxi913836";
+//    private static final String URL = "jdbc:mysql://127.0.0.1:3306/jdbcdemo";
+//    private static final String NAME = "root";
+//    private static final String PASSWORD = "huxi913836";
     public static Connection connection = null;
     public static PreparedStatement pstmt = null;
     public static ResultSet rs = null;
+    private static ComboPooledDataSource pool = new ComboPooledDataSource();
 
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection(URL, NAME, PASSWORD);
+    public static Connection getConnection() throws ClassNotFoundException, SQLException, PropertyVetoException {
+//        Class.forName("com.mysql.jdbc.Driver");
+//        return DriverManager.getConnection(URL, NAME, PASSWORD);
+        pool.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/jdbcdemo");
+        pool.setUser("root");
+        pool.setPassword("huxi913836");
+        pool.setDriverClass("com.mysql.jdbc.Driver");
+        pool.setInitialPoolSize(10);
+        pool.setMaxIdleTime(30);
+        pool.setMaxPoolSize(100);
+        pool.setMinPoolSize(10);
+        pool.setMaxStatements(200);
+        return pool.getConnection();
     }
 
-    public static PreparedStatement creatPreparedStatement(String sql, Object[] params) throws SQLException, ClassNotFoundException {
+    public static PreparedStatement creatPreparedStatement(String sql, Object[] params) throws SQLException, ClassNotFoundException, PropertyVetoException {
         pstmt = getConnection().prepareStatement(sql);
         if (params != null) {
             for (int i = 0; i < params.length; i++) {
@@ -41,7 +54,9 @@ public class DBUtil {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
             CloseAll(rs,pstmt,connection);
         }
         return count;
@@ -72,7 +87,7 @@ public class DBUtil {
             } else {
                 return false;
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | PropertyVetoException e) {
             e.printStackTrace();
             return false;
         } finally {
@@ -87,7 +102,7 @@ public class DBUtil {
             pstmt = creatPreparedStatement(sql, params);
             rs = pstmt.executeQuery();
             return rs;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | PropertyVetoException e) {
             e.printStackTrace();
             return null;
         }

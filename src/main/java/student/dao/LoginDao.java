@@ -23,7 +23,8 @@ public class LoginDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
-        } finally {
+        }
+        finally {
             DBUtil.CloseAll(rs,DBUtil.pstmt,DBUtil.connection);
         }
     }
