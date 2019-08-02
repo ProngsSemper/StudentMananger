@@ -5,19 +5,19 @@ import student.entity.Student;
 import java.util.List;
 
 public interface IStudentDao {
-    public boolean addStudent(Student student);
+    boolean addStudent(Student student);
 
-    public boolean deleteStudentBySno(int sno);
+    boolean deleteStudentBySno(int sno);
 
-    public boolean updateStudentBySno(int sno, Student student);
+    boolean updateStudentBySno(int sno, Student student);
 
-    public boolean isExist(int sno);
+    boolean isExist(int sno);
 
-    public Student queryStudentBySno(int sno);
+    Student queryStudentBySno(int sno);
 
-    public List<Student> queryAllStudents();
+    List<Student> queryAllStudents();
 
-    public int getTotalCount();
+    int getTotalCount();
 
-    public List<Student> queryStudentByPage(int currentPage,int pageSize);
+    List<Student> queryStudentByPage(int currentPage, int pageSize);
 }
