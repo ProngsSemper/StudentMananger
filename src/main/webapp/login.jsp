@@ -11,6 +11,7 @@
     <title>欢迎来到学籍管理系统，请先登录</title>
 </head>
 <body>
+
 <form action="LoginServlet" method="post">
     用户名：<input type="text" name="uname"/><br/>
     密码:<input type="password" name="upwd"/><br/>

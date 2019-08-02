@@ -14,6 +14,13 @@
 </head>
 <body>
 <%
+    String adm = "administrator_login";
+    String flag = "flag";
+    if (!(adm.equals(request.getSession().getAttribute(flag)))){
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+%>
+<%
     String error = (String) request.getAttribute("error");
     if (error != null) {
         if (error.equals("adderror")) {

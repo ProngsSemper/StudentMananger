@@ -5,17 +5,17 @@ import student.entity.Student;
 import java.util.List;
 
 public interface IStudentService {
-    public Student queryStudentBySno(int sno);
+    Student queryStudentBySno(int sno);
 
-    public List<Student> queryAllStudents();
+    List<Student> queryAllStudents();
 
-    public boolean updateStudentBySno(int sno, Student student);
+    boolean updateStudentBySno(int sno, Student student);
 
-    public boolean deleteStudentBySno(int sno);
+    boolean deleteStudentBySno(int sno);
 
-    public boolean addStudent(Student student);
+    boolean addStudent(Student student);
 
-    public List<Student> queryStudentsByPage(int currentPage,int pageSize);
+    List<Student> queryStudentsByPage(int currentPage, int pageSize);
 
-    public int getTotalCount();
+    int getTotalCount();
 }

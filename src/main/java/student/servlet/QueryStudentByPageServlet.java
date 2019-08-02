@@ -22,6 +22,8 @@ public class QueryStudentByPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String adm = "administrator_login";
+        String flag = "flag";
         IStudentService studentService = new StudentServiceImpl();
         int count = studentService.getTotalCount();
         Page page = new Page();
@@ -40,6 +42,10 @@ public class QueryStudentByPageServlet extends HttpServlet {
         System.out.println(count);
         page.setStudents(students);
         request.setAttribute("page",page);
-        request.getRequestDispatcher("administrator.jsp").forward(request,response);
+        if (adm.equals(request.getSession().getAttribute(flag))) {
+            request.getRequestDispatcher("administrator.jsp").forward(request, response);
+        }else {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 }

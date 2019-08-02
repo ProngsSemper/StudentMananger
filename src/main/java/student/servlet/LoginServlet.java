@@ -17,14 +17,21 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String name = request.getParameter("uname");
         String pwd = request.getParameter("upwd");
+        String adm = "administrator";
         Login login = new Login(name, pwd);
         ILoginDao loginDao = new ILoginDaoImpl();
         int result = loginDao.login(login);
-        if ("administrator".equals(name) && "administrator".equals(pwd)) {
-            response.sendRedirect("QueryStudentByPageServlet");
-        } else if (result > 0) {
-            System.out.println("登录成功");
-        } else {
+        if (name.trim().length() > 0 && pwd.trim().length() > 0) {
+            if (adm.equals(name) && adm.equals(pwd)) {
+                request.getSession().setAttribute("flag","administrator_login");
+                response.sendRedirect("QueryStudentByPageServlet");
+            } else if (result > 0) {
+                request.getSession().setAttribute("flag","Student_login");
+                System.out.println("登录成功");
+            } else {
+                response.sendRedirect("login.jsp");
+            }
+        }else {
             response.sendRedirect("login.jsp");
         }
 
