@@ -1,12 +1,15 @@
-package student.dao;
+package student.dao.impl;
 
+import student.dao.ILoginDao;
 import student.entity.Login;
 import student.util.DBUtil;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class LoginDao {
-    public static int login(Login login) {
+public class ILoginDaoImpl implements ILoginDao {
+    @Override
+    public  int login(Login login) {
         int result = -1;
         ResultSet rs = null;
         try {
