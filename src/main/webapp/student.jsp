@@ -19,6 +19,7 @@
         <th>地址</th>
         <th>密码</th>
         <th>操作</th>
+        <th>操作</th>
     </tr>
     <%
         String sname = "sname";
@@ -27,11 +28,11 @@
         }
     %>
     <%
-        Student student = (Student) request.getAttribute("student");
+        Student student = (Student) request.getSession().getAttribute("student");
     %>
     <tr>
-        <td><%=student.getSno()%>
-        </td>
+        <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>"><%=student.getSno()%>
+        </a></td>
         <td><%=student.getSname()%>
         </td>
         <td><%=student.getSage()%>
@@ -40,6 +41,7 @@
         </td>
         <td><%=student.getSpassword()%>
         </td>
+        <td><a href="modify.jsp">修改</a></td>
         <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
     </tr>
 </table>

@@ -42,7 +42,7 @@ public class QueryStudentByPageServlet extends HttpServlet {
             System.out.println(students);
             System.out.println(count);
             page.setStudents(students);
-            request.setAttribute("page", page);
+            request.getSession().setAttribute("page", page);
             request.getRequestDispatcher("administrator.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);

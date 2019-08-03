@@ -30,7 +30,7 @@ public class QueryStudentByNameServlet extends HttpServlet {
         IStudentService studentService = new StudentServiceImpl();
         Student student = studentService.queryStudentByName(name);
         System.out.println(student);
-        request.setAttribute("student", student);
+        request.getSession().setAttribute("student",student);
         request.getRequestDispatcher("student.jsp").forward(request, response);
     }
 }

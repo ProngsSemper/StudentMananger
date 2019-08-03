@@ -23,10 +23,11 @@ public class Student {
         this.spassword = spassword;
     }
 
-    public Student(String sname, int sage, String saddress) {
+    public Student(String sname, int sage, String saddress, String spassword) {
         this.sname = sname;
         this.sage = sage;
         this.saddress = saddress;
+        this.spassword = spassword;
     }
 
     public Student() {

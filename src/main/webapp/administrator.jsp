@@ -40,7 +40,7 @@
         <th>操作</th>
     </tr>
     <%
-        Page pages = (Page) request.getAttribute("page");
+        Page pages = (Page) request.getSession().getAttribute("page");
         for (Student student : pages.getStudents()) {
     %>
     <tr>

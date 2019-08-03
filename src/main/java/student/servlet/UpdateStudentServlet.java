@@ -19,7 +19,7 @@ public class UpdateStudentServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
@@ -28,11 +28,18 @@ public class UpdateStudentServlet extends HttpServlet {
         String name = request.getParameter("sname");
         int age = Integer.parseInt(request.getParameter("sage"));
         String address = request.getParameter("saddress");
-        Student student = new Student(name, age, address);
+        String password = request.getParameter("spassword");
+        Student student = new Student(name, age, address, password);
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.updateStudentBySno(no, student);
         if (result) {
-            response.sendRedirect("QueryAllStudentsServlet");
+            String adm = "administrator_login";
+            String flag = "flag";
+            if (adm.equals(request.getSession().getAttribute(flag))) {
+                response.sendRedirect("QueryStudentByPageServlet");
+            } else {
+                response.sendRedirect("QueryStudentByNameServlet");
+            }
         } else {
             response.getWriter().println("修改失败！");
         }
