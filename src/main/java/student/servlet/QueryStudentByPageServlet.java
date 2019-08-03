@@ -28,23 +28,23 @@ public class QueryStudentByPageServlet extends HttpServlet {
         int count = studentService.getTotalCount();
         Page page = new Page();
         String cPage = request.getParameter("currentPage");
-        if (cPage==null){
-            cPage="0";
+        if (cPage == null) {
+            cPage = "0";
         }
-        int currentPage = Integer.parseInt(cPage);
-        page.setCurrentPage(currentPage);
-        int totalCount = studentService.getTotalCount();
-        page.setTotalCount(totalCount);
-        int pageSize = 10;
-        page.setPageSize(pageSize);
-        List<Student> students = studentService.queryStudentsByPage(currentPage,pageSize);
-        System.out.println(students);
-        System.out.println(count);
-        page.setStudents(students);
-        request.setAttribute("page",page);
         if (adm.equals(request.getSession().getAttribute(flag))) {
+            int currentPage = Integer.parseInt(cPage);
+            page.setCurrentPage(currentPage);
+            int totalCount = studentService.getTotalCount();
+            page.setTotalCount(totalCount);
+            int pageSize = 10;
+            page.setPageSize(pageSize);
+            List<Student> students = studentService.queryStudentsByPage(currentPage, pageSize);
+            System.out.println(students);
+            System.out.println(count);
+            page.setStudents(students);
+            request.setAttribute("page", page);
             request.getRequestDispatcher("administrator.jsp").forward(request, response);
-        }else {
+        } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
