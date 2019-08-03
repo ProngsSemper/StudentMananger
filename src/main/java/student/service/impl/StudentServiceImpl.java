@@ -18,6 +18,11 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
+    public Student queryStudentByName(String name) {
+        return studentDao.queryStudentByName(name);
+    }
+
+    @Override
     public List<Student> queryAllStudents() {
         return studentDao.queryAllStudents();
     }

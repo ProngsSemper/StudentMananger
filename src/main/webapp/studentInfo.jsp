@@ -13,7 +13,7 @@
 </head>
 <body>
     <%
-        Student student = (Student)request.getAttribute("main/java/student");
+        Student student = (Student)request.getAttribute("student");
     %>
     <form action="UpdateStudentServlet">
         学号：<input type="text" name="sno" value="<%=student.getSno()%>" readonly="readonly"/><br/>

@@ -14,7 +14,6 @@ public class Student {
     }
 
     public Student(String sname, int sage, String saddress) {
-        this.sno = sno;
         this.sname = sname;
         this.sage = sage;
         this.saddress = saddress;

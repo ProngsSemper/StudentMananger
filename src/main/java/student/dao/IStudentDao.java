@@ -15,6 +15,8 @@ public interface IStudentDao {
 
     Student queryStudentBySno(int sno);
 
+    Student queryStudentByName(String sname);
+
     List<Student> queryAllStudents();
 
     int getTotalCount();

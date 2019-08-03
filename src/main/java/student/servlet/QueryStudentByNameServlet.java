@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/QueryStudentBySnoServlet")
-public class QueryStudentBySnoServlet extends HttpServlet {
+@WebServlet("/QueryStudentByNameServlet")
+public class QueryStudentByNameServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response){
     }
 
     @Override
@@ -23,11 +22,11 @@ public class QueryStudentBySnoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        int no = Integer.parseInt(request.getParameter("sno"));
+        String name = (String) request.getSession().getAttribute("uname");
         IStudentService studentService = new StudentServiceImpl();
-        Student student = studentService.queryStudentBySno(no);
+        Student student = studentService.queryStudentByName(name);
         System.out.println(student);
-        request.setAttribute("student",student);
-        request.getRequestDispatcher("studentInfo.jsp").forward(request,response);
+        request.setAttribute("student", student);
+        request.getRequestDispatcher("student.jsp").forward(request, response);
     }
 }

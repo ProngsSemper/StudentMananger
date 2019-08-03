@@ -99,6 +99,36 @@ public class StudentDaoImpl implements IStudentDao {
         }
     }
 
+    @Override
+    public Student queryStudentByName(String sname) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Student student = null;
+        try {
+            String sql = "select * from student where sname =? ";
+            pstmt = DBUtil.getConnection().prepareStatement(sql);
+            pstmt.setString(1, sname);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int no = rs.getInt("sno");
+                String name = rs.getString("sname");
+                int age = rs.getInt("sage");
+                String address = rs.getString("saddress");
+                student = new Student(no, name, age, address);
+            }
+            return student;
+        } catch (SQLException | PropertyVetoException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                DBUtil.CloseAll(rs, pstmt, DBUtil.getConnection());
+            } catch (SQLException | PropertyVetoException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * 查询所有学生
      *
