@@ -15,8 +15,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("utf-8");
-        String name = request.getParameter("uname");
-        String pwd = request.getParameter("upwd");
+        String name = request.getParameter("sname");
+        String pwd = request.getParameter("spwd");
         String adm = "administrator";
         Login login = new Login(name, pwd);
         ILoginDao loginDao = new ILoginDaoImpl();
@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("flag","administrator_login");
                 response.sendRedirect("QueryStudentByPageServlet");
             } else if (result > 0) {
-                request.getSession().setAttribute("uname",name);
+                request.getSession().setAttribute("sname",name);
                 response.sendRedirect("QueryStudentByNameServlet");
                 System.out.println("登录成功");
             } else {

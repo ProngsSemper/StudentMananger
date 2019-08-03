@@ -19,14 +19,14 @@ public class QueryStudentByNameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uname = "uname";
-        if (request.getSession().getAttribute(uname)==null){
+        String sname = "sname";
+        if (request.getSession().getAttribute(sname)==null){
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        String name = (String) request.getSession().getAttribute(uname);
+        String name = (String) request.getSession().getAttribute(sname);
         IStudentService studentService = new StudentServiceImpl();
         Student student = studentService.queryStudentByName(name);
         System.out.println(student);

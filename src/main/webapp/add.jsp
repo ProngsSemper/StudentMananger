@@ -16,6 +16,7 @@
         姓名：<input type="text" name="sname"/><br/>
         年龄：<input type="text" name="sage"/><br/>
         地址：<input type="text" name="saddress"/><br/>
+        密码：<input type="password" name="spassword"/><br/>
         <input type="submit" value="新增"><br/>
     </form>
 </body>

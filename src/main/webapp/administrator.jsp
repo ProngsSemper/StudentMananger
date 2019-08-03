@@ -35,6 +35,8 @@
         <th>学号</th>
         <th>姓名</th>
         <th>年龄</th>
+        <th>地址</th>
+        <th>密码</th>
         <th>操作</th>
     </tr>
     <%
@@ -47,6 +49,10 @@
         <td><%=student.getSname()%>
         </td>
         <td><%=student.getSage()%>
+        </td>
+        <td><%=student.getSaddress()%>
+        </td>
+        <td><%=student.getSpassword()%>
         </td>
         <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
     </tr>

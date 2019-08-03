@@ -5,12 +5,22 @@ public class Student {
     private String sname;
     private int sage;
     private String saddress;
+    private String spassword;
 
-    public Student(int sno, String sname, int sage, String saddress) {
+    public String getSpassword() {
+        return spassword;
+    }
+
+    public void setSpassword(String spassword) {
+        this.spassword = spassword;
+    }
+
+    public Student(int sno, String sname, int sage, String saddress, String spassword) {
         this.sno = sno;
         this.sname = sname;
         this.sage = sage;
         this.saddress = saddress;
+        this.spassword = spassword;
     }
 
     public Student(String sname, int sage, String saddress) {
@@ -61,6 +71,7 @@ public class Student {
                 ", sname='" + sname + '\'' +
                 ", sage=" + sage +
                 ", saddress='" + saddress + '\'' +
+                ", spassword='" + spassword + '\'' +
                 '}';
     }
 }

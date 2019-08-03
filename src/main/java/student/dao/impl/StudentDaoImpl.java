@@ -19,8 +19,8 @@ public class StudentDaoImpl implements IStudentDao {
      */
     @Override
     public boolean addStudent(Student student) {
-        Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress()};
-        String sql = "insert into student values(?,?,?,?) ";
+        Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(),student.getSpassword()};
+        String sql = "insert into student values(?,?,?,?,?) ";
         return DBUtil.executeUpdate(sql, params);
 
     }
@@ -84,7 +84,8 @@ public class StudentDaoImpl implements IStudentDao {
                 String name = rs.getString("sname");
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
-                student = new Student(no, name, age, address);
+                String password= rs.getString("spassword");
+                student = new Student(no, name, age, address,password);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -114,7 +115,8 @@ public class StudentDaoImpl implements IStudentDao {
                 String name = rs.getString("sname");
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
-                student = new Student(no, name, age, address);
+                String password= rs.getString("spassword");
+                student = new Student(no, name, age, address,password);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -148,7 +150,8 @@ public class StudentDaoImpl implements IStudentDao {
                 String name = rs.getString("sname");
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
-                student = new Student(no, name, age, address);
+                String password= rs.getString("spassword");
+                student = new Student(no, name, age, address,password);
                 students.add(student);
             }
             return students;
@@ -174,7 +177,7 @@ public class StudentDaoImpl implements IStudentDao {
         List<Student> students = new ArrayList<>();
         try {
             while (rs.next()) {
-                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"));
+                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"),rs.getString("spassword"));
                 students.add(student);
             }
         } catch (SQLException e) {
