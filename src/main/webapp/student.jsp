@@ -1,4 +1,5 @@
-<%@ page import="student.entity.Student" %><%--
+<%@ page import="student.entity.Student" %>
+<%--
   Created by IntelliJ IDEA.
   User: P7XXTM1-G
   Date: 2019/8/3
@@ -31,8 +32,8 @@
         Student student = (Student) request.getSession().getAttribute("student");
     %>
     <tr>
-        <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>"><%=student.getSno()%>
-        </a></td>
+        <td><%=student.getSno()%>
+        </td>
         <td><%=student.getSname()%>
         </td>
         <td><%=student.getSage()%>
@@ -41,7 +42,7 @@
         </td>
         <td><%=student.getSpassword()%>
         </td>
-        <td><a href="modify.jsp">修改</a></td>
+        <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>">修改</a></td>
         <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
     </tr>
 </table>

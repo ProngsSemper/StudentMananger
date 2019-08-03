@@ -38,6 +38,7 @@ public class UpdateStudentServlet extends HttpServlet {
             if (adm.equals(request.getSession().getAttribute(flag))) {
                 response.sendRedirect("QueryStudentByPageServlet");
             } else {
+                request.getSession().setAttribute("sname",name);
                 response.sendRedirect("QueryStudentByNameServlet");
             }
         } else {

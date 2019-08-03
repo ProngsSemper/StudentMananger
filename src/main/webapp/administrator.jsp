@@ -38,14 +38,15 @@
         <th>地址</th>
         <th>密码</th>
         <th>操作</th>
+        <th>操作</th>
     </tr>
     <%
         Page pages = (Page) request.getSession().getAttribute("page");
         for (Student student : pages.getStudents()) {
     %>
     <tr>
-        <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>"><%=student.getSno()%>
-        </a></td>
+        <td><%=student.getSno()%>
+        </td>
         <td><%=student.getSname()%>
         </td>
         <td><%=student.getSage()%>
@@ -54,6 +55,7 @@
         </td>
         <td><%=student.getSpassword()%>
         </td>
+        <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>">修改</a></td>
         <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
     </tr>
     <%
