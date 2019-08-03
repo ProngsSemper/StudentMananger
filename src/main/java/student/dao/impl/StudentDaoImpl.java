@@ -4,14 +4,12 @@ import student.dao.IStudentDao;
 import student.entity.Student;
 import student.util.DBUtil;
 
+import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDaoImpl implements IStudentDao {
-    private final String URL = "jdbc:mysql://127.0.0.1:3306/jdbcdemo";
-    private final String NAME = "root";
-    private final String PASSWORD = "huxi913836";
 
     /**
      * 根据学号增加学生
@@ -73,15 +71,12 @@ public class StudentDaoImpl implements IStudentDao {
      */
     @Override
     public Student queryStudentBySno(int sno) {
-        Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Student student = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, NAME, PASSWORD);
             String sql = "select * from student where sno =? ";
-            pstmt = connection.prepareStatement(sql);
+            pstmt = DBUtil.getConnection().prepareStatement(sql);
             pstmt.setInt(1, sno);
             rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -92,21 +87,13 @@ public class StudentDaoImpl implements IStudentDao {
                 student = new Student(no, name, age, address);
             }
             return student;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException | PropertyVetoException e) {
             e.printStackTrace();
             return null;
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
+                DBUtil.CloseAll(rs, pstmt, DBUtil.getConnection());
+            } catch (SQLException | PropertyVetoException e) {
                 e.printStackTrace();
             }
         }
