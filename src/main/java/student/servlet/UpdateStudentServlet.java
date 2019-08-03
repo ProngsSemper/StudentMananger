@@ -38,6 +38,7 @@ public class UpdateStudentServlet extends HttpServlet {
             if (adm.equals(request.getSession().getAttribute(flag))) {
                 response.sendRedirect("QueryStudentByPageServlet");
             } else {
+                //令QueryStudentByNameServlet重新获取学生名字达到更新目的
                 request.getSession().setAttribute("sname",name);
                 response.sendRedirect("QueryStudentByNameServlet");
             }
