@@ -19,6 +19,12 @@
         <th>操作</th>
     </tr>
     <%
+        String uname = "uname";
+        if (request.getSession().getAttribute(uname)==null){
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    %>
+    <%
         Student student = (Student) request.getAttribute("student");
     %>
     <tr>
@@ -31,6 +37,6 @@
         <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
     </tr>
 </table>
-
+<a href="LogoutServlet">注销</a>
 </body>
 </html>

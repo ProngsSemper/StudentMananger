@@ -16,7 +16,7 @@
 <%
     String adm = "administrator_login";
     String flag = "flag";
-    if (!(adm.equals(request.getSession().getAttribute(flag)))){
+    if (!(adm.equals(request.getSession().getAttribute(flag)))) {
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 %>
@@ -58,14 +58,17 @@
 <%
     if (pages.getTotalPage() == 1) {
 %>
+<a href="LogoutServlet">注销</a>
 <% } else if (pages.getTotalPage() - 1 == pages.getCurrentPage()) {
 %>
 <a href="/QueryStudentByPageServlet?currentPage=0">首页</a>
 <a href="/QueryStudentByPageServlet?currentPage=<%=pages.getCurrentPage()-1%>">上一页</a>
+<a href="LogoutServlet">注销</a>
 <% } else if (pages.getCurrentPage() == 0) {
 %>
 <a href="/QueryStudentByPageServlet?currentPage=<%=pages.getCurrentPage()+1%>">下一页</a>
 <a href="/QueryStudentByPageServlet?currentPage=<%=pages.getTotalPage()-1%>">尾页</a>
+<a href="LogoutServlet">注销</a>
 <%
 } else {
 %>
@@ -73,6 +76,7 @@
 <a href="/QueryStudentByPageServlet?currentPage=<%=pages.getCurrentPage()-1%>">上一页</a>
 <a href="/QueryStudentByPageServlet?currentPage=<%=pages.getCurrentPage()+1%>">下一页</a>
 <a href="/QueryStudentByPageServlet?currentPage=<%=pages.getTotalPage()-1%>">尾页</a>
+<a href="LogoutServlet">注销</a>
 <%
     }
 %>
