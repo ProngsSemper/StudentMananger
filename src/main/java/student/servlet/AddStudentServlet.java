@@ -29,6 +29,8 @@ public class AddStudentServlet extends HttpServlet {
         String address = request.getParameter("saddress");
         String password = request.getParameter("spassword");
         Student student = new Student(no, name, age, address, password);
+        String adm = "administrator_login";
+        String flag = "flag";
 
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.addStudent(student);
@@ -37,6 +39,12 @@ public class AddStudentServlet extends HttpServlet {
         } else {
             request.setAttribute("error", "noadderror");
         }
-        request.getRequestDispatcher("QueryStudentByPageServlet").forward(request, response);
+
+        if (adm.equals(request.getSession().getAttribute(flag))) {
+            request.getRequestDispatcher("QueryStudentByPageServlet").forward(request, response);
+        }else {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+
     }
 }

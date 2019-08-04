@@ -23,17 +23,21 @@ public class LoginServlet extends HttpServlet {
         int result = loginDao.login(login);
         if (name.trim().length() > 0 && pwd.trim().length() > 0) {
             if (adm.equals(name) && adm.equals(pwd)) {
-                request.getSession().setAttribute("flag","administrator_login");
+                request.getSession().setAttribute("flag", "administrator_login");
                 response.sendRedirect("QueryStudentByPageServlet");
             } else if (result > 0) {
-                request.getSession().setAttribute("sname",name);
+                request.getSession().setAttribute("sname", name);
                 response.sendRedirect("QueryStudentByNameServlet");
                 System.out.println("登录成功");
             } else {
+                request.getSession().setAttribute("sname", "");
                 response.sendRedirect("login.jsp");
+                System.out.println("登陆失败");
             }
-        }else {
+        } else {
+            request.getSession().setAttribute("sname", "");
             response.sendRedirect("login.jsp");
+            System.out.println("登陆失败");
         }
 
     }
