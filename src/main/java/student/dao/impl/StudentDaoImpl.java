@@ -182,21 +182,27 @@ public class StudentDaoImpl implements IStudentDao {
     }
 
     @Override
-    public List<Student> queryConditional(String sname,String saddress) {
+    public List<Student> queryConditional(String sname, String saddress) {
         List<Student> list = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         String sql = "select * from student where 1=1";
-        if (sname!= null) {
+        if (sname != null && !("".equals(sname))) {
             sql = sql + " and sname like ?";
         }
-        if (saddress!= null) {
+        if (saddress != null && !("".equals(saddress))) {
             sql = sql + " and saddress like ?";
         }
         try {
-            pstmt=DBUtil.getConnection().prepareStatement(sql);
-            pstmt.setString(1, sname);
-            pstmt.setString(2,saddress);
+            pstmt = DBUtil.getConnection().prepareStatement(sql);
+            if (sname != null && !("".equals(sname))) {
+                pstmt.setString(1, sname);
+                if (saddress != null && !("".equals(saddress))) {
+                    pstmt.setString(2, saddress);
+                }
+            } else if (saddress != null && !("".equals(saddress))) {
+                pstmt.setString(1, saddress);
+            }
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Student studentList = new Student();
@@ -213,7 +219,7 @@ public class StudentDaoImpl implements IStudentDao {
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.CloseAll(rs,pstmt,DBUtil.connection);
+            DBUtil.CloseAll(rs, pstmt, DBUtil.connection);
         }
         return list;
     }

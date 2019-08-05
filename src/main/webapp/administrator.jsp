@@ -27,6 +27,8 @@
             out.print("增加失败！");
         } else if (error.equals("noadderror")) {
             out.print("增加成功");
+        }else if (error.equals("conditionerror")){
+            out.print("请输入查询条件！");
         }
     }
 %>
