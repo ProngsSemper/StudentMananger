@@ -30,6 +30,12 @@
         }
     }
 %>
+<form action="QueryConditionalServlet">
+    按条件查询
+    姓名：<input type="text" name="name">
+    地址：<input type="text" name="address">
+    <input type="submit" value="查询"><br/>
+</form>
 <table border="1px">
     <tr>
         <th>学号</th>

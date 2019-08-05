@@ -19,5 +19,7 @@ public interface IStudentService {
 
     List<Student> queryStudentsByPage(int currentPage, int pageSize);
 
+    List<Student> queryConditional(String sname,String saddress);
+
     int getTotalCount();
 }

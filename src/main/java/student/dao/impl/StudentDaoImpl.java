@@ -5,7 +5,9 @@ import student.entity.Student;
 import student.util.DBUtil;
 
 import java.beans.PropertyVetoException;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class StudentDaoImpl implements IStudentDao {
      */
     @Override
     public boolean addStudent(Student student) {
-        Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(),student.getSpassword()};
+        Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword()};
         String sql = "insert into student values(?,?,?,?,?) ";
         return DBUtil.executeUpdate(sql, params);
 
@@ -63,12 +65,6 @@ public class StudentDaoImpl implements IStudentDao {
         return queryStudentBySno(sno) != null;
     }
 
-    /**
-     * 查询是否存在
-     *
-     * @param sno
-     * @return
-     */
     @Override
     public Student queryStudentBySno(int sno) {
         PreparedStatement pstmt = null;
@@ -84,8 +80,8 @@ public class StudentDaoImpl implements IStudentDao {
                 String name = rs.getString("sname");
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
-                String password= rs.getString("spassword");
-                student = new Student(no, name, age, address,password);
+                String password = rs.getString("spassword");
+                student = new Student(no, name, age, address, password);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -115,8 +111,8 @@ public class StudentDaoImpl implements IStudentDao {
                 String name = rs.getString("sname");
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
-                String password= rs.getString("spassword");
-                student = new Student(no, name, age, address,password);
+                String password = rs.getString("spassword");
+                student = new Student(no, name, age, address, password);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -140,7 +136,6 @@ public class StudentDaoImpl implements IStudentDao {
     public List<Student> queryAllStudents() {
         List<Student> students = new ArrayList<>();
         Student student = null;
-        PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
             String sql = "select * from student";
@@ -150,8 +145,8 @@ public class StudentDaoImpl implements IStudentDao {
                 String name = rs.getString("sname");
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
-                String password= rs.getString("spassword");
-                student = new Student(no, name, age, address,password);
+                String password = rs.getString("spassword");
+                student = new Student(no, name, age, address, password);
                 students.add(student);
             }
             return students;
@@ -159,7 +154,7 @@ public class StudentDaoImpl implements IStudentDao {
             e.printStackTrace();
             return null;
         } finally {
-            DBUtil.CloseAll(rs, pstmt, DBUtil.connection);
+            DBUtil.CloseAll(rs, DBUtil.pstmt, DBUtil.connection);
         }
     }
 
@@ -177,12 +172,49 @@ public class StudentDaoImpl implements IStudentDao {
         List<Student> students = new ArrayList<>();
         try {
             while (rs.next()) {
-                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"),rs.getString("spassword"));
+                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"), rs.getString("spassword"));
                 students.add(student);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return students;
+    }
+
+    @Override
+    public List<Student> queryConditional(String sname,String saddress) {
+        List<Student> list = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        String sql = "select * from student where 1=1";
+        if (sname!= null) {
+            sql = sql + " and sname like ?";
+        }
+        if (saddress!= null) {
+            sql = sql + " and saddress like ?";
+        }
+        try {
+            pstmt=DBUtil.getConnection().prepareStatement(sql);
+            pstmt.setString(1, sname);
+            pstmt.setString(2,saddress);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Student studentList = new Student();
+                studentList.setSno(rs.getInt("sno"));
+                studentList.setSname(rs.getString("sname"));
+                studentList.setSage(rs.getInt("sage"));
+                studentList.setSaddress(rs.getString("saddress"));
+                studentList.setSpassword(rs.getString("spassword"));
+                list.add(studentList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.CloseAll(rs,pstmt,DBUtil.connection);
+        }
+        return list;
     }
 }

@@ -22,4 +22,6 @@ public interface IStudentDao {
     int getTotalCount();
 
     List<Student> queryStudentByPage(int currentPage, int pageSize);
+
+    List<Student> queryConditional(String sname,String saddress);
 }

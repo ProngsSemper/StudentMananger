@@ -61,6 +61,11 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
+    public List<Student> queryConditional(String sname,String saddress) {
+        return studentDao.queryConditional(sname,saddress);
+    }
+
+    @Override
     public int getTotalCount() {
         return studentDao.getTotalCount();
     }
