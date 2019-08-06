@@ -27,7 +27,7 @@
             out.print("增加失败！");
         } else if (error.equals("noadderror")) {
             out.print("增加成功");
-        }else if (error.equals("conditionerror")){
+        } else if (error.equals("conditionerror")) {
             out.print("请输入查询条件！");
         }
     }
@@ -40,6 +40,7 @@
 </form>
 <table border="1px">
     <tr>
+        <th>头像</th>
         <th>学号</th>
         <th>姓名</th>
         <th>年龄</th>
@@ -53,6 +54,12 @@
         for (Student student : pages.getStudents()) {
     %>
     <tr>
+        <td>
+            <form action="UploadServlet" method="post" enctype="multipart/form-data">
+                上传/修改头像：<input type="file" name="spicture"/><br/>
+                <input type="submit" value="上传">
+            </form>
+        </td>
         <td><%=student.getSno()%>
         </td>
         <td><%=student.getSname()%>

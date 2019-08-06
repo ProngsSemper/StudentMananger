@@ -14,6 +14,7 @@
 <body>
 <table border="1px">
     <tr>
+        <th>头像</th>
         <th>学号</th>
         <th>姓名</th>
         <th>年龄</th>
@@ -32,6 +33,12 @@
         Student student = (Student) request.getSession().getAttribute("student");
     %>
     <tr>
+        <td>
+            <form action="UploadServlet" method="post" enctype="multipart/form-data">
+                上传/修改头像：<input type="file" name="spicture"/><br/>
+                        <input type="submit" value="上传">
+            </form>
+        </td>
         <td><%=student.getSno()%>
         </td>
         <td><%=student.getSname()%>

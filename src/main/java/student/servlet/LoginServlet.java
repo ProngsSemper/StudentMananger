@@ -1,7 +1,7 @@
 package student.servlet;
 
 import student.dao.ILoginDao;
-import student.dao.impl.ILoginDaoImpl;
+import student.dao.impl.LoginDaoImpl;
 import student.entity.Login;
 
 import javax.servlet.annotation.WebServlet;
@@ -19,13 +19,14 @@ public class LoginServlet extends HttpServlet {
         String pwd = request.getParameter("spwd");
         String adm = "administrator";
         Login login = new Login(name, pwd);
-        ILoginDao loginDao = new ILoginDaoImpl();
+        ILoginDao loginDao = new LoginDaoImpl();
         int result = loginDao.login(login);
         if (name.trim().length() > 0 && pwd.trim().length() > 0) {
             if (adm.equals(name) && adm.equals(pwd)) {
                 request.getSession().setAttribute("flag", "administrator_login");
                 response.sendRedirect("QueryStudentByPageServlet");
             } else if (result > 0) {
+                request.getSession().setAttribute("flag", "student_login");
                 request.getSession().setAttribute("sname", name);
                 response.sendRedirect("QueryStudentByNameServlet");
                 System.out.println("登录成功");

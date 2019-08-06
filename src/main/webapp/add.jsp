@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>注册</title>
 </head>
 <body>
     <form action="AddStudentServlet">
@@ -17,7 +17,7 @@
         年龄：<input type="text" name="sage"/><br/>
         地址：<input type="text" name="saddress"/><br/>
         密码：<input type="password" name="spassword"/><br/>
-        <input type="submit" value="新增"><br/>
+        <input type="submit" value="注册"><br/>
     </form>
 </body>
 </html>
