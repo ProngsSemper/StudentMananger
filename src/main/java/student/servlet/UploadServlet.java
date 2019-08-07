@@ -31,15 +31,18 @@ public class UploadServlet extends HttpServlet {
                 while (iterator.hasNext()) {
                     FileItem item = iterator.next();
                     //动态获取文件路径
-//                    String path = request.getSession().getServletContext().getRealPath("upload");
-                    String path = "E:\\StudentManager\\src\\main\\webapp\\upload";
+                    String fakePath = request.getSession().getServletContext().getRealPath("/");
+                    String path = fakePath.replace("out\\artifacts\\StundentManager_war_exploded","src\\main\\webapp\\upload");
+//                    String path = "E:\\StudentManager\\src\\main\\webapp\\upload";
+                    System.out.println(path);
                     String fileName = item.getName();
+                    System.out.println(fileName);
                     String ext = fileName.substring(fileName.indexOf(".") + 1);
                     if (!("png".equals(ext) || "gif".equals(ext) || "jpg".equals(ext))) {
                         System.out.println("图片类型有误");
                         if ("student_login".equals(request.getSession().getAttribute("flag"))) {
                             request.getRequestDispatcher("student.jsp").forward(request, response);
-                        }else if ("administrator_login".equals(request.getSession().getAttribute("flag"))){
+                        } else if ("administrator_login".equals(request.getSession().getAttribute("flag"))) {
                             request.getRequestDispatcher("administrator.jsp").forward(request, response);
                         }
                         return;
@@ -51,10 +54,10 @@ public class UploadServlet extends HttpServlet {
                     try {
                         //上传
                         item.write(file);
-                        request.getSession().setAttribute("img",fileName);
+                        request.getSession().setAttribute("img", fileName);
                         if ("student_login".equals(request.getSession().getAttribute("flag"))) {
                             request.getRequestDispatcher("student.jsp").forward(request, response);
-                        }else if ("administrator_login".equals(request.getSession().getAttribute("flag"))){
+                        } else if ("administrator_login".equals(request.getSession().getAttribute("flag"))) {
                             request.getRequestDispatcher("administrator.jsp").forward(request, response);
                         }
                         return;

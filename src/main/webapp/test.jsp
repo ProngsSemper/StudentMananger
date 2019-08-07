@@ -12,7 +12,7 @@
 </head>
 <body>
 <form>
-    <img alt="头像" src="upload\\1.jpg" height="100px" width="100px">
+    <img alt="头像" src="upload\\<%=request.getSession().getAttribute("img")%>" height="100px" width="100px">
 </form>
 </body>
 </html>
