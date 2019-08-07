@@ -56,6 +56,7 @@
     <tr>
         <td>
             <form action="UploadServlet" method="post" enctype="multipart/form-data">
+<%--                <img alt="无法显示图片" src="upload\\<%=request.getSession().getAttribute("img")%>" height="100px" width="100px">--%>
                 上传/修改头像：<input type="file" name="spicture"/><br/>
                 <input type="submit" value="上传">
             </form>

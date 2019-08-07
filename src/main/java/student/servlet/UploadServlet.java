@@ -30,9 +30,9 @@ public class UploadServlet extends HttpServlet {
                 Iterator<FileItem> iterator = items.iterator();
                 while (iterator.hasNext()) {
                     FileItem item = iterator.next();
-                    String itemName = item.getFieldName();
                     //动态获取文件路径
-                    String path = request.getSession().getServletContext().getRealPath("upload");
+//                    String path = request.getSession().getServletContext().getRealPath("upload");
+                    String path = "E:\\StudentManager\\src\\main\\webapp\\upload";
                     String fileName = item.getName();
                     String ext = fileName.substring(fileName.indexOf(".") + 1);
                     if (!("png".equals(ext) || "gif".equals(ext) || "jpg".equals(ext))) {
@@ -51,6 +51,7 @@ public class UploadServlet extends HttpServlet {
                     try {
                         //上传
                         item.write(file);
+                        request.getSession().setAttribute("img",fileName);
                         if ("student_login".equals(request.getSession().getAttribute("flag"))) {
                             request.getRequestDispatcher("student.jsp").forward(request, response);
                         }else if ("administrator_login".equals(request.getSession().getAttribute("flag"))){
