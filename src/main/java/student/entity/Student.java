@@ -7,12 +7,35 @@ public class Student {
     private String saddress;
     private String spassword;
 
+    public Student(String simg) {
+        this.simg = simg;
+    }
+
+    public String getSimg() {
+        return simg;
+    }
+
+    public void setSimg(String simg) {
+        this.simg = simg;
+    }
+
+    private String simg;
+
     public String getSpassword() {
         return spassword;
     }
 
     public void setSpassword(String spassword) {
         this.spassword = spassword;
+    }
+
+    public Student(int sno, String sname, int sage, String saddress, String spassword, String simg) {
+        this.sno = sno;
+        this.sname = sname;
+        this.sage = sage;
+        this.saddress = saddress;
+        this.spassword = spassword;
+        this.simg = simg;
     }
 
     public Student(int sno, String sname, int sage, String saddress, String spassword) {
@@ -73,6 +96,7 @@ public class Student {
                 ", sage=" + sage +
                 ", saddress='" + saddress + '\'' +
                 ", spassword='" + spassword + '\'' +
+                ", simg='" + simg + '\'' +
                 '}';
     }
 }

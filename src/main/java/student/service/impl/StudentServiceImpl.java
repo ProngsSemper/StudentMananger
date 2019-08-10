@@ -66,6 +66,14 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
+    public boolean updateStudentImg(int sno, Student student) {
+        if (studentDao.isExist(sno)) {
+            return studentDao.updateStudentImg(sno, student);
+        }
+        return false;
+    }
+
+    @Override
     public int getTotalCount() {
         return studentDao.getTotalCount();
     }

@@ -24,4 +24,6 @@ public interface IStudentDao {
     List<Student> queryStudentByPage(int currentPage, int pageSize);
 
     List<Student> queryConditional(String sname,String saddress);
+
+    boolean updateStudentImg(int sno, Student student);
 }

@@ -23,12 +23,14 @@
 <%
     String error = (String) request.getAttribute("error");
     if (error != null) {
-        if (error.equals("adderror")) {
+        if (error.equals("addError")) {
             out.print("增加失败！");
-        } else if (error.equals("noadderror")) {
+        } else if (error.equals("noAddError")) {
             out.print("增加成功");
-        } else if (error.equals("conditionerror")) {
+        } else if (error.equals("conditionError")) {
             out.print("请输入查询条件！");
+        }else if (error.equals("uploadError")){
+            out.print("上传文件格式可能有误！");
         }
     }
 %>

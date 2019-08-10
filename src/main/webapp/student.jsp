@@ -31,19 +31,26 @@
     %>
     <%
         Student student = (Student) request.getSession().getAttribute("student");
+        request.getSession().setAttribute("imgSno", student.getSno());
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+            if (error.equals("uploadError")) {
+                out.print("上传文件格式可能有误！");
+            }
+        }
     %>
     <tr>
         <td>
             <form action="UploadServlet" method="post" enctype="multipart/form-data">
                 <%
-                    if (!(request.getSession().getAttribute("img").equals(""))){
+                    if (!(student.getSimg() == null)) {
                 %>
-                <img alt="无法显示图片" src="upload\\<%=request.getSession().getAttribute("img")%>" height="100px" width="100px"><br/>
+                <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
                 <%
                     }
                 %>
-                上传/修改头像：<input type="file" name="spicture"/><br/>
-                        <input type="submit" value="上传">
+                上传/修改头像：<input type="file" name="simg"/><br/>
+                <input type="submit" value="上传">
             </form>
         </td>
         <td><%=student.getSno()%>

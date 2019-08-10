@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("flag", "administrator_login");
                 response.sendRedirect("QueryStudentByPageServlet");
             } else if (result > 0) {
-                request.getSession().setAttribute("img", "");
                 request.getSession().setAttribute("flag", "student_login");
                 request.getSession().setAttribute("sname", name);
                 response.sendRedirect("QueryStudentByNameServlet");

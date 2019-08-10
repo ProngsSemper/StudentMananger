@@ -35,9 +35,9 @@ public class AddStudentServlet extends HttpServlet {
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.addStudent(student);
         if (!result) {
-            request.setAttribute("error", "adderror");
+            request.setAttribute("error", "addError");
         } else {
-            request.setAttribute("error", "noadderror");
+            request.setAttribute("error", "noAddError");
         }
 
         if (adm.equals(request.getSession().getAttribute(flag))) {

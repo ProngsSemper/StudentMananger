@@ -81,7 +81,8 @@ public class StudentDaoImpl implements IStudentDao {
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
                 String password = rs.getString("spassword");
-                student = new Student(no, name, age, address, password);
+                String img = rs.getString("simg");
+                student = new Student(no, name, age, address, password,img);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -112,7 +113,8 @@ public class StudentDaoImpl implements IStudentDao {
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
                 String password = rs.getString("spassword");
-                student = new Student(no, name, age, address, password);
+                String img = rs.getString("simg");
+                student = new Student(no, name, age, address, password,img);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -146,7 +148,8 @@ public class StudentDaoImpl implements IStudentDao {
                 int age = rs.getInt("sage");
                 String address = rs.getString("saddress");
                 String password = rs.getString("spassword");
-                student = new Student(no, name, age, address, password);
+                String img = rs.getString("simg");
+                student = new Student(no, name, age, address, password,img);
                 students.add(student);
             }
             return students;
@@ -172,7 +175,7 @@ public class StudentDaoImpl implements IStudentDao {
         List<Student> students = new ArrayList<>();
         try {
             while (rs.next()) {
-                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"), rs.getString("spassword"));
+                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"), rs.getString("spassword"),rs.getString("simg"));
                 students.add(student);
             }
         } catch (SQLException e) {
@@ -222,5 +225,12 @@ public class StudentDaoImpl implements IStudentDao {
             DBUtil.CloseAll(rs, pstmt, DBUtil.connection);
         }
         return list;
+    }
+
+    @Override
+    public boolean updateStudentImg(int sno, Student student) {
+        String sql = "update student set simg=? where sno=? ";
+        Object[] params = {student.getSimg(), sno};
+        return DBUtil.executeUpdate(sql, params);
     }
 }

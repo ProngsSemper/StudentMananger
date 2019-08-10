@@ -21,5 +21,7 @@ public interface IStudentService {
 
     List<Student> queryConditional(String sname,String saddress);
 
+    boolean updateStudentImg(int sno, Student student);
+
     int getTotalCount();
 }

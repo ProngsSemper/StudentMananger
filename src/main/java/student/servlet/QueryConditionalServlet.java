@@ -28,7 +28,7 @@ public class QueryConditionalServlet extends HttpServlet {
         String sname = request.getParameter("name");
         String saddress = request.getParameter("address");
         if ("".equals(sname) && "".equals(saddress)) {
-            request.setAttribute("error", "conditionerror");
+            request.setAttribute("error", "conditionError");
             request.getRequestDispatcher("administrator.jsp").forward(request, response);
         } else {
             List<Student> students = studentService.queryConditional(sname, saddress);
