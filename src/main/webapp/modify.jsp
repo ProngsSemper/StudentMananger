@@ -13,8 +13,26 @@
 </head>
 <body>
 <%
+//    String error = (String) request.getSession().getAttribute("error");
+//    if (error != null) {
+//        if (error.equals("uploadError")) {
+//            out.print("上传文件格式可能有误！");
+//        }
+//    }
     Student student = (Student) request.getAttribute("students");
+    request.getSession().setAttribute("imgSno", student.getSno());
 %>
+<form action="UploadServlet" method="post" enctype="multipart/form-data">
+    <%
+        if (student.getSimg() != null) {
+    %>
+    <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
+    <%
+        }
+    %>
+    上传/修改头像：<input type="file" name="simg"/><br/>
+    <input type="submit" value="上传">
+</form>
 <form action="UpdateStudentServlet">
     学号：<input type="text" name="sno" value="<%=student.getSno()%>" readonly="readonly"/><br/>
     姓名：<input type="text" name="sname" value="<%=student.getSname()%>"/><br/>

@@ -36,42 +36,44 @@ public class UploadServlet extends HttpServlet {
                 Iterator<FileItem> iterator = items.iterator();
                 while (iterator.hasNext()) {
                     FileItem item = iterator.next();
-                    int no = (int) request.getSession().getAttribute("imgSno");
-                        String fakePath = request.getSession().getServletContext().getRealPath("/");
-                        String path = fakePath.replace("out\\artifacts\\StundentManager_war_exploded", "src\\main\\webapp\\upload");
-                        String fileName = item.getName();
-                        String ext = fileName.substring(fileName.indexOf(".") + 1);
-                        if (!("png".equals(ext) || "gif".equals(ext) || "jpg".equals(ext))) {
-                            request.setAttribute("error", "uploadError");
-                            System.out.println("图片类型有误");
-                            if ("student_login".equals(request.getSession().getAttribute("flag"))) {
-                                request.getRequestDispatcher("student.jsp").forward(request, response);
-                            } else if ("administrator_login".equals(request.getSession().getAttribute("flag"))) {
-                                request.getRequestDispatcher("administrator.jsp").forward(request, response);
-                            }
-                            return;
+                    String fakePath = request.getSession().getServletContext().getRealPath("/");
+                    String path = fakePath.replace("out\\artifacts\\StundentManager_war_exploded", "src\\main\\webapp\\upload");
+                    String fileName = item.getName();
+                    String ext = fileName.substring(fileName.indexOf(".") + 1);
+                    if (!("png".equals(ext) || "gif".equals(ext) || "jpg".equals(ext))) {
+                        request.setAttribute("error", "uploadError");
+                        System.out.println("图片类型有误");
+                        if ("student_login".equals(request.getSession().getAttribute("flag"))) {
+                            request.getRequestDispatcher("student.jsp").forward(request, response);
+                        } else if ("administrator_login".equals(request.getSession().getAttribute("flag"))) {
+                            request.getRequestDispatcher("administrator.jsp").forward(request, response);
                         }
-                        File file = new File(path, fileName);
-                        factory.setSizeThreshold(10240);
-                        try {
-                            //上传
-                            item.write(file);
-                            Student student = new Student(fileName);
-                            IStudentService studentService = new StudentServiceImpl();
-                            boolean result = studentService.updateStudentImg(no, student);
-                            if (result) {
-                                String adm = "administrator_login";
-                                String flag = "flag";
-                                if (adm.equals(request.getSession().getAttribute(flag))) {
-                                    response.sendRedirect("QueryStudentByPageServlet");
-                                } else {
-                                    response.sendRedirect("QueryStudentByNameServlet");
-                                }
+//                        request.getRequestDispatcher("modify.jsp").forward(request, response);
+                        return;
+                    }
+                    File file = new File(path, fileName);
+                    factory.setSizeThreshold(10240);
+                    try {
+                        //上传
+                        int no = (int) request.getSession().getAttribute("imgSno");
+                        item.write(file);
+                        Student student = new Student(fileName);
+                        IStudentService studentService = new StudentServiceImpl();
+                        boolean result = studentService.updateStudentImg(no, student);
+                        if (result) {
+                            String adm = "administrator_login";
+                            String flag = "flag";
+                            if (adm.equals(request.getSession().getAttribute(flag))) {
+                                response.sendRedirect("QueryStudentByPageServlet");
+                            } else {
+                                response.sendRedirect("QueryStudentByNameServlet");
                             }
-                            return;
-                        } catch (Exception e) {
-                            e.printStackTrace();
+//                            response.sendRedirect("modify.jsp");
                         }
+                        return;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             } catch (FileUploadBase.FileSizeLimitExceededException e) {

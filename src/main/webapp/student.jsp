@@ -31,7 +31,6 @@
     %>
     <%
         Student student = (Student) request.getSession().getAttribute("student");
-        request.getSession().setAttribute("imgSno", student.getSno());
         String error = (String) request.getAttribute("error");
         if (error != null) {
             if (error.equals("uploadError")) {
@@ -41,17 +40,15 @@
     %>
     <tr>
         <td>
-            <form action="UploadServlet" method="post" enctype="multipart/form-data">
-                <%
-                    if (!(student.getSimg() == null)) {
-                %>
-                <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
-                <%
-                    }
-                %>
-                上传/修改头像：<input type="file" name="simg"/><br/>
-                <input type="submit" value="上传">
-            </form>
+            <%
+                if (!(student.getSimg() == null)) {
+            %>
+            <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
+            <%
+                } else {
+                    out.print("暂无头像！");
+                }
+            %>
         </td>
         <td><%=student.getSno()%>
         </td>
