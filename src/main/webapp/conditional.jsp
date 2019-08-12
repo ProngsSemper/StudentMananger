@@ -14,9 +14,12 @@
 <body>
 <table border="1px">
     <tr>
+        <th>头像</th>
         <th>学号</th>
         <th>姓名</th>
         <th>年龄</th>
+        <th>性别</th>
+        <th>电话号码</th>
         <th>地址</th>
         <th>密码</th>
         <th>操作</th>
@@ -27,11 +30,26 @@
         for (Student student : students) {
     %>
     <tr>
+        <td>
+        <%
+            if (!(student.getSimg() == null)) {
+        %>
+        <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
+        <%
+            } else {
+                out.print("暂无头像！");
+            }
+        %>
+        </td>
         <td><%=student.getSno()%>
         </td>
         <td><%=student.getSname()%>
         </td>
         <td><%=student.getSage()%>
+        </td>
+        <td><%=student.getSgender()%>
+        </td>
+        <td><%=student.getSnum()%>
         </td>
         <td><%=student.getSaddress()%>
         </td>

@@ -1,7 +1,5 @@
 package student.service.impl;
 
-
-
 import student.dao.IStudentDao;
 import student.dao.impl.StudentDaoImpl;
 import student.entity.Student;
@@ -61,8 +59,8 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public List<Student> queryConditional(String sname,String saddress) {
-        return studentDao.queryConditional(sname,saddress);
+    public List<Student> queryConditional(String sname, String saddress, String sgender) {
+        return studentDao.queryConditional(sname, saddress, sgender);
     }
 
     @Override

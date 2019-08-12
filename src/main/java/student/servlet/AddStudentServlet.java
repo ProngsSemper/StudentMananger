@@ -28,7 +28,9 @@ public class AddStudentServlet extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("sage"));
         String address = request.getParameter("saddress");
         String password = request.getParameter("spassword");
-        Student student = new Student(no, name, age, address, password);
+        int num = Integer.parseInt(request.getParameter("snum"));
+        String gender = request.getParameter("sgender");
+        Student student = new Student(no, name, age, address, password, num, gender);
         String adm = "administrator_login";
         String flag = "flag";
 
@@ -42,7 +44,7 @@ public class AddStudentServlet extends HttpServlet {
 
         if (adm.equals(request.getSession().getAttribute(flag))) {
             request.getRequestDispatcher("QueryStudentByPageServlet").forward(request, response);
-        }else {
+        } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 

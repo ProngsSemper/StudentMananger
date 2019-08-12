@@ -29,7 +29,9 @@ public class UpdateStudentServlet extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("sage"));
         String address = request.getParameter("saddress");
         String password = request.getParameter("spassword");
-        Student student = new Student(name, age, address, password);
+        int num = Integer.parseInt(request.getParameter("snum"));
+        String gender = request.getParameter("sgender");
+        Student student = new Student(name, age, address, password, num, gender);
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.updateStudentBySno(no, student);
         if (result) {
@@ -39,7 +41,7 @@ public class UpdateStudentServlet extends HttpServlet {
                 response.sendRedirect("QueryStudentByPageServlet");
             } else {
                 //令QueryStudentByNameServlet重新获取学生名字达到更新目的
-                request.getSession().setAttribute("sname",name);
+                request.getSession().setAttribute("sname", name);
                 response.sendRedirect("QueryStudentByNameServlet");
             }
         } else {

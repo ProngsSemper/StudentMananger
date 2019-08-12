@@ -6,6 +6,9 @@ public class Student {
     private int sage;
     private String saddress;
     private String spassword;
+    private String simg;
+    private int snum;
+    private String sgender;
 
     public Student(String simg) {
         this.simg = simg;
@@ -19,8 +22,6 @@ public class Student {
         this.simg = simg;
     }
 
-    private String simg;
-
     public String getSpassword() {
         return spassword;
     }
@@ -29,28 +30,34 @@ public class Student {
         this.spassword = spassword;
     }
 
-    public Student(int sno, String sname, int sage, String saddress, String spassword, String simg) {
+    public Student(int sno, String sname, int sage, String saddress, String spassword, String simg, int snum, String sgender) {
         this.sno = sno;
         this.sname = sname;
         this.sage = sage;
         this.saddress = saddress;
         this.spassword = spassword;
         this.simg = simg;
+        this.snum = snum;
+        this.sgender = sgender;
     }
 
-    public Student(int sno, String sname, int sage, String saddress, String spassword) {
+    public Student(int sno, String sname, int sage, String saddress, String spassword, int snum, String sgender) {
         this.sno = sno;
         this.sname = sname;
         this.sage = sage;
         this.saddress = saddress;
         this.spassword = spassword;
+        this.snum = snum;
+        this.sgender = sgender;
     }
 
-    public Student(String sname, int sage, String saddress, String spassword) {
+    public Student(String sname, int sage, String saddress, String spassword, int snum, String sgender) {
         this.sname = sname;
         this.sage = sage;
         this.saddress = saddress;
         this.spassword = spassword;
+        this.snum = snum;
+        this.sgender = sgender;
     }
 
     public Student() {
@@ -88,6 +95,22 @@ public class Student {
         this.saddress = saddress;
     }
 
+    public int getSnum() {
+        return snum;
+    }
+
+    public void setSnum(int snum) {
+        this.snum = snum;
+    }
+
+    public String getSgender() {
+        return sgender;
+    }
+
+    public void setSgender(String sgender) {
+        this.sgender = sgender;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -97,6 +120,8 @@ public class Student {
                 ", saddress='" + saddress + '\'' +
                 ", spassword='" + spassword + '\'' +
                 ", simg='" + simg + '\'' +
+                ", snum=" + snum +
+                ", sgender='" + sgender + '\'' +
                 '}';
     }
 }

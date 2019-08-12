@@ -21,8 +21,8 @@ public class StudentDaoImpl implements IStudentDao {
      */
     @Override
     public boolean addStudent(Student student) {
-        Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword()};
-        String sql = "insert into student values(?,?,?,?,?) ";
+        Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword(), null, student.getSnum(), student.getSgender()};
+        String sql = "insert into student values(?,?,?,?,?,?,?,?) ";
         return DBUtil.executeUpdate(sql, params);
 
     }
@@ -49,8 +49,8 @@ public class StudentDaoImpl implements IStudentDao {
      */
     @Override
     public boolean updateStudentBySno(int sno, Student student) {
-        String sql = "update student set sname =?,sage=?,saddress=? where sno=? ";
-        Object[] params = {student.getSname(), student.getSage(), student.getSaddress(), sno};
+        String sql = "update student set sname =?,sage=?,saddress=?,snum=?,sgender=? where sno=? ";
+        Object[] params = {student.getSname(), student.getSage(), student.getSaddress(), student.getSnum(), student.getSgender(), sno};
         return DBUtil.executeUpdate(sql, params);
     }
 
@@ -82,7 +82,9 @@ public class StudentDaoImpl implements IStudentDao {
                 String address = rs.getString("saddress");
                 String password = rs.getString("spassword");
                 String img = rs.getString("simg");
-                student = new Student(no, name, age, address, password,img);
+                int num = rs.getInt("snum");
+                String gender = rs.getString("sgender");
+                student = new Student(no, name, age, address, password, img, num, gender);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -114,7 +116,9 @@ public class StudentDaoImpl implements IStudentDao {
                 String address = rs.getString("saddress");
                 String password = rs.getString("spassword");
                 String img = rs.getString("simg");
-                student = new Student(no, name, age, address, password,img);
+                int num = rs.getInt("snum");
+                String gender = rs.getString("sgender");
+                student = new Student(no, name, age, address, password, img, num, gender);
             }
             return student;
         } catch (SQLException | PropertyVetoException e) {
@@ -149,7 +153,9 @@ public class StudentDaoImpl implements IStudentDao {
                 String address = rs.getString("saddress");
                 String password = rs.getString("spassword");
                 String img = rs.getString("simg");
-                student = new Student(no, name, age, address, password,img);
+                int num = rs.getInt("snum");
+                String gender = rs.getString("sgender");
+                student = new Student(no, name, age, address, password, img, num, gender);
                 students.add(student);
             }
             return students;
@@ -175,7 +181,7 @@ public class StudentDaoImpl implements IStudentDao {
         List<Student> students = new ArrayList<>();
         try {
             while (rs.next()) {
-                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"), rs.getString("spassword"),rs.getString("simg"));
+                Student student = new Student(rs.getInt("sno"), rs.getString("sname"), rs.getInt("sage"), rs.getString("saddress"), rs.getString("spassword"), rs.getString("simg"), rs.getInt("snum"), rs.getString("sgender"));
                 students.add(student);
             }
         } catch (SQLException e) {
@@ -185,7 +191,7 @@ public class StudentDaoImpl implements IStudentDao {
     }
 
     @Override
-    public List<Student> queryConditional(String sname, String saddress) {
+    public List<Student> queryConditional(String sname, String saddress, String sgender) {
         List<Student> list = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
@@ -196,24 +202,41 @@ public class StudentDaoImpl implements IStudentDao {
         if (saddress != null && !("".equals(saddress))) {
             sql = sql + " and saddress like ?";
         }
+        if (sgender != null && !("".equals(sgender))) {
+            sql = sql + " and sgender like ?";
+        }
         try {
             pstmt = DBUtil.getConnection().prepareStatement(sql);
             if (sname != null && !("".equals(sname))) {
                 pstmt.setString(1, sname);
                 if (saddress != null && !("".equals(saddress))) {
                     pstmt.setString(2, saddress);
+                    if (sgender != null && !("".equals(sgender))) {
+                        pstmt.setString(3, sgender);
+                    }
+                } else if (sgender != null && !("".equals(sgender))) {
+                    pstmt.setString(2, sgender);
                 }
             } else if (saddress != null && !("".equals(saddress))) {
                 pstmt.setString(1, saddress);
+                if (sgender != null && !("".equals(sgender))) {
+                    pstmt.setString(2, sgender);
+                }
+            } else if (sgender != null && !("".equals(sgender))) {
+                pstmt.setString(1, sgender);
             }
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Student studentList = new Student();
+                studentList.setSimg(rs.getString("simg"));
                 studentList.setSno(rs.getInt("sno"));
                 studentList.setSname(rs.getString("sname"));
                 studentList.setSage(rs.getInt("sage"));
                 studentList.setSaddress(rs.getString("saddress"));
                 studentList.setSpassword(rs.getString("spassword"));
+                studentList.setSimg(rs.getString("simg"));
+                studentList.setSnum(rs.getInt("snum"));
+                studentList.setSgender(rs.getString("sgender"));
                 list.add(studentList);
             }
         } catch (SQLException e) {

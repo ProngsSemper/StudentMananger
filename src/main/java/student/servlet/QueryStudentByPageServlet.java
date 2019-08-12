@@ -36,7 +36,7 @@ public class QueryStudentByPageServlet extends HttpServlet {
             page.setCurrentPage(currentPage);
             int totalCount = studentService.getTotalCount();
             page.setTotalCount(totalCount);
-            int pageSize = 10;
+            int pageSize = 3;
             page.setPageSize(pageSize);
             List<Student> students = studentService.queryStudentsByPage(currentPage, pageSize);
             System.out.println(students);
