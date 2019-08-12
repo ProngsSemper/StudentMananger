@@ -14,9 +14,9 @@
 <%
     String error = (String) request.getAttribute("error");
     if (error != null) {
-        if (error.equals("adderror")) {
-            out.print("注册失败！");
-        } else if (error.equals("noadderror")) {
+        if (error.equals("addError")) {
+            out.print("注册失败！用户已存在！");
+        } else if (error.equals("noAddError")) {
             out.print("注册成功！");
         }
     }

@@ -13,6 +13,8 @@ public interface IStudentDao {
 
     boolean isExist(int sno);
 
+    boolean isExist(String sname);
+
     Student queryStudentBySno(int sno);
 
     Student queryStudentByName(String sname);

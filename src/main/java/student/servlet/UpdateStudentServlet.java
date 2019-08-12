@@ -33,7 +33,7 @@ public class UpdateStudentServlet extends HttpServlet {
         String gender = request.getParameter("sgender");
         Student student = new Student(name, age, address, password, num, gender);
         IStudentService studentService = new StudentServiceImpl();
-        boolean result = studentService.updateStudentBySno(no, student);
+        boolean result = studentService.updateStudentBySno(no,name, student);
         if (result) {
             String adm = "administrator_login";
             String flag = "flag";

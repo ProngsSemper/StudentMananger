@@ -23,6 +23,7 @@ public class DeleteStudentServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
         int no = Integer.parseInt(request.getParameter("sno"));
+        String name = request.getParameter("sname");
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.deleteStudentBySno(no);
         if (result) {

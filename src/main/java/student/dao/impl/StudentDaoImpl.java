@@ -54,12 +54,11 @@ public class StudentDaoImpl implements IStudentDao {
         return DBUtil.executeUpdate(sql, params);
     }
 
-    /**
-     * 判断学生是否存在
-     *
-     * @param sno
-     * @return
-     */
+    @Override
+    public boolean isExist(String sname) {
+        return  queryStudentByName(sname) != null;
+    }
+
     @Override
     public boolean isExist(int sno) {
         return queryStudentBySno(sno) != null;

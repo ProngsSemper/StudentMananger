@@ -26,7 +26,7 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public boolean updateStudentBySno(int sno, Student student) {
+    public boolean updateStudentBySno(int sno, String sname, Student student) {
         if (studentDao.isExist(sno)) {
             return studentDao.updateStudentBySno(sno, student);
         }
@@ -44,7 +44,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public boolean addStudent(Student student) {
-        if (!studentDao.isExist(student.getSno())) {
+        if (!(studentDao.isExist(student.getSno())||studentDao.isExist(student.getSname()))) {
             studentDao.addStudent(student);
             return true;
         } else {
