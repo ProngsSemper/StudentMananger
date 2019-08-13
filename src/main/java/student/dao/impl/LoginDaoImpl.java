@@ -7,6 +7,9 @@ import student.util.DBUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Prongs
+ */
 public class LoginDaoImpl implements ILoginDao {
     @Override
     public  int login(Login login) {

@@ -11,28 +11,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Prongs
+ */
 public class StudentDaoImpl implements IStudentDao {
 
-    /**
-     * 根据学号增加学生
-     *
-     * @param student
-     * @return
-     */
+
     @Override
     public boolean addStudent(Student student) {
         Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword(), null, student.getSnum(), student.getSgender()};
         String sql = "insert into student values(?,?,?,?,?,?,?,?) ";
         return DBUtil.executeUpdate(sql, params);
-
     }
 
-    /**
-     * 根据学号删除学生
-     *
-     * @param sno
-     * @return
-     */
+
     @Override
     public boolean deleteStudentBySno(int sno) {
         String sql = "delete from student where sno=?";
@@ -40,13 +32,6 @@ public class StudentDaoImpl implements IStudentDao {
         return DBUtil.executeUpdate(sql, params);
     }
 
-    /**
-     * 修改学生信息
-     *
-     * @param sno
-     * @param student
-     * @return
-     */
     @Override
     public boolean updateStudentBySno(int sno, Student student) {
         String sql = "update student set sname =?,sage=?,saddress=?,snum=?,sgender=? where sno=? ";

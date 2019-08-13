@@ -1,7 +1,6 @@
 package student.servlet;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -48,7 +47,6 @@ public class UploadServlet extends HttpServlet {
                         } else if ("administrator_login".equals(request.getSession().getAttribute("flag"))) {
                             request.getRequestDispatcher("administrator.jsp").forward(request, response);
                         }
-//                        request.getRequestDispatcher("modify.jsp").forward(request, response);
                         return;
                     }
                     File file = new File(path, fileName);
@@ -68,7 +66,6 @@ public class UploadServlet extends HttpServlet {
                             } else {
                                 response.sendRedirect("QueryStudentByNameServlet");
                             }
-//                            response.sendRedirect("modify.jsp");
                         }
                         return;
                     } catch (Exception e) {
@@ -76,8 +73,6 @@ public class UploadServlet extends HttpServlet {
                     }
                 }
 
-            } catch (FileUploadBase.FileSizeLimitExceededException e) {
-                System.out.println("超过上传文件大小限制");
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
