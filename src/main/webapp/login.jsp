@@ -9,29 +9,43 @@
 <html>
 <head>
     <title>欢迎来到学籍管理系统，请先登录</title>
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript">
+        function login() {
+            var data = $("#login").serialize();
+            $.ajax({
+                url: "LoginServlet",
+                type: "post",
+                data: data,
+                success: function (result, testStatus) {
+                    if (result == "adm_login") {
+                        alert("登录成功！");
+                        window.location.href = 'QueryStudentByPageServlet';
+                    } else if (result == "stu_login") {
+                        alert("登录成功！");
+                        window.location.href = 'QueryStudentByNameServlet';
+                    } else {
+                        alert("登录失败！请检查用户名或密码是否有误！");
+                        window.location.href = 'login.jsp';
+                    }
+                },
+                error: function (xhr, errorMessage, e) {
+                    alert("系统异常");
+                }
+            });
+        }
+
+        function register() {
+            window.location.href = 'add.jsp';
+        }
+    </script>
 </head>
 <body>
-<%
-    String error = (String) request.getAttribute("error");
-    if (error != null) {
-        if (error.equals("addError")) {
-            out.print("注册失败！用户已存在！");
-        } else if (error.equals("noAddError")) {
-            out.print("注册成功！");
-        }
-    }
-%>
-<%
-    String fail = (String) request.getSession().getAttribute("sname");
-    if ("".equals(fail)) {
-        out.print("登陆失败！用户名或密码错误！");
-    }
-%>
-<form action="LoginServlet" method="post">
+<form id="login">
     用户名：<input type="text" name="sname"/><br/>
     密码:<input type="password" name="spwd"/><br/>
-    <input type="submit" value="登录"/>
-    <input type="submit" value="注册" formaction="add.jsp">
+    <input type="button" value="登录" onclick="login()"/>
+    <input type="button" value="注册" onclick="register()"/>
 </form>
 </body>
 </html>

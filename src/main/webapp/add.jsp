@@ -37,6 +37,10 @@
                 }
             });
         }
+
+        function goBack() {
+            window.location.href = 'login.jsp';
+        }
     </script>
 </head>
 <body>
@@ -48,7 +52,8 @@
     电话号码：<input type="text" name="snum"/><br/>
     地址：<input type="text" name="saddress"/><br/>
     密码：<input type="password" name="spassword"/><br/>
-    <input type="button" value="注册" onclick="register()"><br/>
+    <input type="button" value="注册" onclick="register()"/>
+    <input type="button" value="返回" onclick="goBack()"/><br/>
 </form>
 </body>
 </html>
