@@ -19,13 +19,11 @@ public interface IStudentDao {
 
     Student queryStudentByName(String sname);
 
-    List<Student> queryAllStudents();
-
     int getTotalCount();
 
     List<Student> queryStudentByPage(int currentPage, int pageSize);
 
-    List<Student> queryConditional(String sname,String saddress,String sgender);
+    List<Student> queryConditional(String sname, String saddress, String sgender);
 
     boolean updateStudentImg(int sno, Student student);
 }

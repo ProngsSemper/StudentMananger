@@ -56,7 +56,7 @@ public class StudentDaoImpl implements IStudentDao {
 
     @Override
     public boolean isExist(String sname) {
-        return  queryStudentByName(sname) != null;
+        return queryStudentByName(sname) != null;
     }
 
     @Override
@@ -129,40 +129,6 @@ public class StudentDaoImpl implements IStudentDao {
             } catch (SQLException | PropertyVetoException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    /**
-     * 查询所有学生
-     *
-     * @return
-     */
-    @Override
-    public List<Student> queryAllStudents() {
-        List<Student> students = new ArrayList<>();
-        Student student = null;
-        ResultSet rs = null;
-        try {
-            String sql = "select * from student";
-            rs = DBUtil.executeQuery(sql, null);
-            while (rs.next()) {
-                int no = rs.getInt("sno");
-                String name = rs.getString("sname");
-                int age = rs.getInt("sage");
-                String address = rs.getString("saddress");
-                String password = rs.getString("spassword");
-                String img = rs.getString("simg");
-                int num = rs.getInt("snum");
-                String gender = rs.getString("sgender");
-                student = new Student(no, name, age, address, password, img, num, gender);
-                students.add(student);
-            }
-            return students;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            DBUtil.CloseAll(rs, DBUtil.pstmt, DBUtil.connection);
         }
     }
 

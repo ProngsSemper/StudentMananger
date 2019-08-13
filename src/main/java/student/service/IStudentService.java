@@ -9,8 +9,6 @@ public interface IStudentService {
 
     Student queryStudentByName(String name);
 
-    List<Student> queryAllStudents();
-
     boolean updateStudentBySno(int sno, String sname, Student student);
 
     boolean deleteStudentBySno(int sno);

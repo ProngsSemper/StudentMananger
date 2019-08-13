@@ -22,8 +22,8 @@
     }
 %>
 <%
-    String fail = (String)request.getSession().getAttribute("sname");
-    if ("".equals(fail)){
+    String fail = (String) request.getSession().getAttribute("sname");
+    if ("".equals(fail)) {
         out.print("登陆失败！用户名或密码错误！");
     }
 %>

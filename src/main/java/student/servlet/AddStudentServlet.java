@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/AddStudentServlet")
 public class AddStudentServlet extends HttpServlet {
@@ -23,6 +24,7 @@ public class AddStudentServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
         int no = Integer.parseInt(request.getParameter("sno"));
         String name = request.getParameter("sname");
         int age = Integer.parseInt(request.getParameter("sage"));
@@ -37,16 +39,17 @@ public class AddStudentServlet extends HttpServlet {
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.addStudent(student);
         if (!result) {
-            request.setAttribute("error", "addError");
+            if (adm.equals(request.getSession().getAttribute(flag))) {
+                out.write("adm_false");
+            } else {
+                out.write("false");
+            }
         } else {
-            request.setAttribute("error", "noAddError");
+            if (adm.equals(request.getSession().getAttribute(flag))) {
+                out.write("adm_true");
+            } else {
+                out.write("true");
+            }
         }
-
-        if (adm.equals(request.getSession().getAttribute(flag))) {
-            request.getRequestDispatcher("QueryStudentByPageServlet").forward(request, response);
-        } else {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-
     }
 }

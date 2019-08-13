@@ -23,7 +23,6 @@
         <th>地址</th>
         <th>密码</th>
         <th>操作</th>
-        <th>操作</th>
     </tr>
     <%
         String sname = "sname";
@@ -67,7 +66,6 @@
         <td><%=student.getSpassword()%>
         </td>
         <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>">修改</a></td>
-        <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
     </tr>
 </table>
 <a href="LogoutServlet">注销</a>
