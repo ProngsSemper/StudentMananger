@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/UpdateStudentServlet")
 public class UpdateStudentServlet extends HttpServlet {
@@ -23,29 +24,31 @@ public class UpdateStudentServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        String adm = "administrator_login";
+        String flag = "flag";
         request.getParameter("sno");
-        int no = Integer.parseInt(request.getParameter("sno"));
-        String name = request.getParameter("sname");
-        int age = Integer.parseInt(request.getParameter("sage"));
-        String address = request.getParameter("saddress");
-        String password = request.getParameter("spassword");
-        int num = Integer.parseInt(request.getParameter("snum"));
-        String gender = request.getParameter("sgender");
-        Student student = new Student(name, age, address, password, num, gender);
-        IStudentService studentService = new StudentServiceImpl();
-        boolean result = studentService.updateStudentBySno(no,name, student);
-        if (result) {
-            String adm = "administrator_login";
-            String flag = "flag";
-            if (adm.equals(request.getSession().getAttribute(flag))) {
-                response.sendRedirect("QueryStudentByPageServlet");
-            } else {
-                //令QueryStudentByNameServlet重新获取学生名字达到更新目的
-                request.getSession().setAttribute("sname", name);
-                response.sendRedirect("QueryStudentByNameServlet");
+        try {
+            int no = Integer.parseInt(request.getParameter("sno"));
+            String name = request.getParameter("sname");
+            int age = Integer.parseInt(request.getParameter("sage"));
+            String address = request.getParameter("saddress");
+            String password = request.getParameter("spassword");
+            int num = Integer.parseInt(request.getParameter("snum"));
+            String gender = request.getParameter("sgender");
+            Student student = new Student(name, age, address, password, num, gender);
+            IStudentService studentService = new StudentServiceImpl();
+            boolean result = studentService.updateStudentBySno(no, name, student);
+            if (result) {
+                if (adm.equals(request.getSession().getAttribute(flag))) {
+                    out.write("adm_update");
+                } else {
+                    request.getSession().setAttribute("sname", name);
+                    out.write("stu_update");
+                }
             }
-        } else {
-            response.getWriter().println("修改失败！");
+        } catch (NumberFormatException e) {
+            out.write("false");
         }
 
     }
