@@ -43,6 +43,14 @@
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 %>
+<%
+    String error = (String) request.getAttribute("error");
+    if (error != null) {
+        if (error.equals("uploadError")) {
+            out.print("上传文件格式可能有误！");
+        }
+    }
+%>
 <form id="conditional">
     按条件查询
     姓名：<input type="text" name="name">

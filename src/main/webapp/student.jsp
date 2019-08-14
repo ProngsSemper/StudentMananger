@@ -32,6 +32,12 @@
     %>
     <%
         Student student = (Student) request.getSession().getAttribute("student");
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+            if (error.equals("uploadError")) {
+                out.print("上传文件格式可能有误！");
+            }
+        }
     %>
     <tr>
         <td>
