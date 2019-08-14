@@ -11,6 +11,29 @@
 <html>
 <head>
     <title>管理员</title>
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript">
+        function conditional() {
+            var data = $("#conditional").serialize();
+            $.ajax({
+                url: "QueryConditionalServlet",
+                type: "get",
+                data: data,
+                success: function (result, testStatus) {
+                    if (result == "nothing") {
+                        alert("请输入要查询的信息！");
+                    } else if (result == "nobody") {
+                        alert("查无此人！");
+                    } else {
+                        window.location.href = 'conditional.jsp';
+                    }
+                },
+                error: function (xhr, errorMessage, e) {
+                    alert("系统异常");
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <%
@@ -23,19 +46,17 @@
 <%
     String error = (String) request.getAttribute("error");
     if (error != null) {
-        if (error.equals("conditionError")) {
-            out.print("请输入查询条件！");
-        } else if (error.equals("uploadError")) {
+        if (error.equals("uploadError")) {
             out.print("上传文件格式可能有误！");
         }
     }
 %>
-<form action="QueryConditionalServlet">
+<form id="conditional">
     按条件查询
     姓名：<input type="text" name="name">
     地址：<input type="text" name="address">
     性别：<input type="text" name="gender">
-    <input type="submit" value="查询"><br/>
+    <input type="button" value="查询" onclick="conditional()"><br/>
 </form>
 <table border="1px">
     <tr>
