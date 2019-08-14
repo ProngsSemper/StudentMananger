@@ -12,6 +12,7 @@
     <title>修改</title>
     <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
     <script type="text/javascript">
+        //修改学生信息
         function update() {
             var data = $("#update").serialize();
             $.ajax({
@@ -35,6 +36,7 @@
             });
         }
 
+        //修改学生头像
         function upload() {
             $.ajax({
                 url: "UploadServlet",
