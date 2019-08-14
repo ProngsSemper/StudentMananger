@@ -15,6 +15,7 @@
     <script type="text/javascript">
         /*
         按条件筛选学生
+        */
         function conditional() {
             var data = $("#conditional").serialize();
             $.ajax({
