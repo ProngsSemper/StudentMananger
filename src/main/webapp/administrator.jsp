@@ -13,7 +13,8 @@
     <title>管理员</title>
     <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
     <script type="text/javascript">
-        //按条件筛选学生
+        /*
+        按条件筛选学生
         function conditional() {
             var data = $("#conditional").serialize();
             $.ajax({
@@ -33,6 +34,14 @@
                     alert("系统异常");
                 }
             });
+        }
+
+        /*
+        删除学生前先询问管理员是否确定删除
+         */
+        function deleteConfirm() {
+            var confirm = window.confirm("您确定删除该学生吗？");
+            return confirm;
         }
     </script>
 </head>
@@ -98,7 +107,7 @@
         <td><%=student.getSpassword()%>
         </td>
         <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>">修改</a></td>
-        <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
+        <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>" onclick="return deleteConfirm()">删除</a></td>
     </tr>
     <%
         }

@@ -34,6 +34,10 @@
                 }
             });
         }
+        function deleteConfirm() {
+            var confirm = window.confirm("您确定删除吗？");
+            return confirm;
+        }
     </script>
 </head>
 <body>
@@ -98,7 +102,7 @@
         <td><%=student.getSpassword()%>
         </td>
         <td><a href="QueryStudentBySnoServlet?sno=<%=student.getSno()%>">修改</a></td>
-        <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>">删除</a></td>
+        <td><a href="DeleteStudentServlet?sno=<%=student.getSno()%>" onclick="return deleteConfirm()">删除</a></td>
     </tr>
     <%
         }
