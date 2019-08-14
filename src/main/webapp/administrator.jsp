@@ -2,7 +2,7 @@
 <%@ page import="student.entity.Student" %>
 <%--
   Created by IntelliJ IDEA.
-  User: P7XXTM1-G
+  User: Prongs
   Date: 2019/7/21
   Time: 19:31
   To change this template use File | Settings | File Templates.

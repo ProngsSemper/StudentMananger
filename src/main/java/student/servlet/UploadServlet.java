@@ -39,6 +39,7 @@ public class UploadServlet extends HttpServlet {
                     String path = fakePath.replace("out\\artifacts\\StundentManager_war_exploded", "src\\main\\webapp\\upload");
                     String fileName = item.getName();
                     String ext = fileName.substring(fileName.indexOf(".") + 1);
+                    //判断文件类型
                     if (!("png".equals(ext) || "gif".equals(ext) || "jpg".equals(ext))) {
                         request.setAttribute("error", "uploadError");
                         System.out.println("图片类型有误");
