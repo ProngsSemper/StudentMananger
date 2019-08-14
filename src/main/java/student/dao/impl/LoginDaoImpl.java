@@ -4,6 +4,7 @@ import student.dao.ILoginDao;
 import student.entity.Login;
 import student.util.DBUtil;
 
+import java.beans.PropertyVetoException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -31,7 +32,11 @@ public class LoginDaoImpl implements ILoginDao {
             return -1;
         }
         finally {
-            DBUtil.CloseAll(rs,DBUtil.pstmt,DBUtil.connection);
+            try {
+                DBUtil.closeAll(rs,DBUtil.pstmt,DBUtil.getConnection());
+            } catch (SQLException | PropertyVetoException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Prongs
+ */
 @WebServlet("/QueryStudentByNameServlet")
 public class QueryStudentByNameServlet extends HttpServlet {
     @Override
@@ -30,6 +33,9 @@ public class QueryStudentByNameServlet extends HttpServlet {
         IStudentService studentService = new StudentServiceImpl();
         Student student = studentService.queryStudentByName(name);
         System.out.println(student);
+        /*
+        将student对象放入session值中方便前端获取
+         */
         request.getSession().setAttribute("student",student);
         request.getRequestDispatcher("student.jsp").forward(request, response);
     }

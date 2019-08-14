@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: P7XXTM1-G
+  User: Prongs
   Date: 2019/7/31
   Time: 20:55
   To change this template use File | Settings | File Templates.
@@ -36,6 +36,7 @@
             });
         }
 
+        //注册
         function register() {
             window.location.href = 'add.jsp';
         }
@@ -44,7 +45,7 @@
 <body>
 <form id="login">
     用户名：<input type="text" name="sname"/><br/>
-    密码:<input type="password" name="spwd"/><br/>
+    密码：<input type="password" name="spwd"/><br/>
     <input type="button" value="登录" onclick="login()"/>
     <input type="button" value="注册" onclick="register()"/>
 </form>

@@ -16,14 +16,12 @@ import java.util.List;
  */
 public class StudentDaoImpl implements IStudentDao {
 
-
     @Override
     public boolean addStudent(Student student) {
         Object[] params = {student.getSno(), student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword(), null, student.getSnum(), student.getSgender()};
         String sql = "insert into student values(?,?,?,?,?,?,?,?) ";
         return DBUtil.executeUpdate(sql, params);
     }
-
 
     @Override
     public boolean deleteStudentBySno(int sno) {
@@ -34,8 +32,8 @@ public class StudentDaoImpl implements IStudentDao {
 
     @Override
     public boolean updateStudentBySno(int sno, Student student) {
-        String sql = "update student set sname =?,sage=?,saddress=?,snum=?,sgender=? where sno=? ";
-        Object[] params = {student.getSname(), student.getSage(), student.getSaddress(), student.getSnum(), student.getSgender(), sno};
+        String sql = "update student set sname =?,sage=?,saddress=?,spassword=?,snum=?,sgender=? where sno=? ";
+        Object[] params = {student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword(),student.getSnum(), student.getSgender(), sno};
         return DBUtil.executeUpdate(sql, params);
     }
 
@@ -76,7 +74,7 @@ public class StudentDaoImpl implements IStudentDao {
             return null;
         } finally {
             try {
-                DBUtil.CloseAll(rs, pstmt, DBUtil.getConnection());
+                DBUtil.closeAll(rs, pstmt, DBUtil.getConnection());
             } catch (SQLException | PropertyVetoException e) {
                 e.printStackTrace();
             }
@@ -110,7 +108,7 @@ public class StudentDaoImpl implements IStudentDao {
             return null;
         } finally {
             try {
-                DBUtil.CloseAll(rs, pstmt, DBUtil.getConnection());
+                DBUtil.closeAll(rs, pstmt, DBUtil.getConnection());
             } catch (SQLException | PropertyVetoException e) {
                 e.printStackTrace();
             }
@@ -195,7 +193,11 @@ public class StudentDaoImpl implements IStudentDao {
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.CloseAll(rs, pstmt, DBUtil.connection);
+            try {
+                DBUtil.closeAll(rs, pstmt, DBUtil.getConnection());
+            } catch (SQLException | PropertyVetoException e) {
+                e.printStackTrace();
+            }
         }
         return list;
     }

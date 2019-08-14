@@ -25,6 +25,9 @@
         <th>操作</th>
     </tr>
     <%
+        /*
+        防止空值登录
+         */
         String sname = "sname";
         if (request.getSession().getAttribute(sname) == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);

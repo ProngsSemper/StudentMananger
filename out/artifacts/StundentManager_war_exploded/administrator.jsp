@@ -13,6 +13,7 @@
     <title>管理员</title>
     <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
     <script type="text/javascript">
+        //按条件筛选学生
         function conditional() {
             var data = $("#conditional").serialize();
             $.ajax({
@@ -37,6 +38,9 @@
 </head>
 <body>
 <%
+    /*
+    防止空值登录
+     */
     String adm = "administrator_login";
     String flag = "flag";
     if (!(adm.equals(request.getSession().getAttribute(flag)))) {

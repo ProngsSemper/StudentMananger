@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * @author Prongs
+ */
 @WebServlet("/QueryConditionalServlet")
 public class QueryConditionalServlet extends HttpServlet {
     @Override
@@ -30,10 +33,16 @@ public class QueryConditionalServlet extends HttpServlet {
         String sname = request.getParameter("name");
         String saddress = request.getParameter("address");
         String sgender = request.getParameter("gender");
+        /*
+        当没有输入查询条件时执行
+         */
         if ("".equals(sname) && "".equals(saddress) && "".equals(sgender)) {
             out.write("nothing");
         } else {
             List<Student> students = studentService.queryConditional(sname, saddress, sgender);
+            /*
+            当查无结果时执行
+             */
             if (students.isEmpty()) {
                 out.write("nobody");
             } else {

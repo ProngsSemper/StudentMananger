@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: P7XXTM1-G
+  User: Prongs
   Date: 2019/7/21
   Time: 16:39
   To change this template use File | Settings | File Templates.
@@ -11,6 +11,7 @@
     <title>注册</title>
     <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
     <script type="text/javascript">
+        //增加/注册学生
         function register() {
             var data = $("#add").serialize();
             $.ajax({
@@ -22,7 +23,7 @@
                         alert("新增成功！");
                         window.location.href = 'QueryStudentByPageServlet';
                     } else if (result == "adm_false") {
-                        alert("增加失败！用户可能已存在！");
+                        alert("新增用户失败！用户可能已存在！");
                         window.location.href = 'QueryStudentByPageServlet';
                     } else if (result == "true") {
                         alert("注册成功！");

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Prongs
+ */
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
     @Override
@@ -19,6 +22,9 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
+        /*
+        使所有session无效化并返回登录页面，实现注销功能
+         */
         request.getSession().invalidate();
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }

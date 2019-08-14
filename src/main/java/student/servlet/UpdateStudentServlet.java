@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author Prongs
+ */
 @WebServlet("/UpdateStudentServlet")
 public class UpdateStudentServlet extends HttpServlet {
     @Override
@@ -39,6 +42,9 @@ public class UpdateStudentServlet extends HttpServlet {
             Student student = new Student(name, age, address, password, num, gender);
             IStudentService studentService = new StudentServiceImpl();
             boolean result = studentService.updateStudentBySno(no, student);
+            /*
+            判断是学生做修改还是管理员做修改
+             */
             if (result) {
                 if (adm.equals(request.getSession().getAttribute(flag))) {
                     out.write("adm_update");
@@ -47,6 +53,9 @@ public class UpdateStudentServlet extends HttpServlet {
                     out.write("stu_update");
                 }
             }
+            /*
+            防止用户填写信息类型有误
+             */
         } catch (NumberFormatException e) {
             out.write("false");
         }

@@ -1,17 +1,17 @@
 package student.util;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import student.entity.Student;
 
 import java.beans.PropertyVetoException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * @author Prongs
+ */
 public class DBUtil {
-    public static Connection connection = null;
+    private static Connection connection = null;
     public static PreparedStatement pstmt = null;
-    public static ResultSet rs = null;
+    private static ResultSet rs = null;
     private static ComboPooledDataSource pool = new ComboPooledDataSource();
 
     public static Connection getConnection() throws SQLException, PropertyVetoException {
@@ -27,7 +27,7 @@ public class DBUtil {
         return pool.getConnection();
     }
 
-    public static PreparedStatement creatPreparedStatement(String sql, Object[] params) throws SQLException, PropertyVetoException {
+    private static PreparedStatement creatPreparedStatement(String sql, Object[] params) throws SQLException, PropertyVetoException {
         pstmt = getConnection().prepareStatement(sql);
         if (params != null) {
             for (int i = 0; i < params.length; i++) {
@@ -45,17 +45,15 @@ public class DBUtil {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
+        } catch (SQLException | PropertyVetoException e) {
             e.printStackTrace();
         } finally {
-            CloseAll(rs, pstmt, connection);
+            closeAll(rs, pstmt, connection);
         }
         return count;
     }
 
-    public static void CloseAll(ResultSet rs, Statement statement, Connection connection) {
+    public static void closeAll(ResultSet rs, Statement statement, Connection connection) {
         try {
             if (rs != null) {
                 rs.close();
@@ -75,22 +73,16 @@ public class DBUtil {
         try {
             pstmt = creatPreparedStatement(sql, params);
             int count = pstmt.executeUpdate();
-            if (count > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return count > 0;
         } catch (SQLException | PropertyVetoException e) {
             e.printStackTrace();
             return false;
         } finally {
-            CloseAll(null, pstmt, connection);
+            closeAll(null, pstmt, connection);
         }
     }
 
     public static ResultSet executeQuery(String sql, Object[] params) {
-        List<Student> students = new ArrayList<>();
-        Student student = null;
         try {
             pstmt = creatPreparedStatement(sql, params);
             rs = pstmt.executeQuery();

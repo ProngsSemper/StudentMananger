@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Prongs
+ */
 @WebServlet("/DeleteStudentServlet")
 public class DeleteStudentServlet extends HttpServlet {
     @Override
@@ -23,7 +26,6 @@ public class DeleteStudentServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
         int no = Integer.parseInt(request.getParameter("sno"));
-        String name = request.getParameter("sname");
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.deleteStudentBySno(no);
         if (result) {

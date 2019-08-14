@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author Prongs
+ */
 @WebServlet("/AddStudentServlet")
 public class AddStudentServlet extends HttpServlet {
     @Override
@@ -38,6 +41,9 @@ public class AddStudentServlet extends HttpServlet {
 
         IStudentService studentService = new StudentServiceImpl();
         boolean result = studentService.addStudent(student);
+        /*
+         判断是学生还是管理员进行的增加学生操作
+         */
         if (!result) {
             if (adm.equals(request.getSession().getAttribute(flag))) {
                 out.write("adm_false");
