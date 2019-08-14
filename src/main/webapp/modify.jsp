@@ -34,20 +34,39 @@
                 }
             });
         }
+
+        function upload() {
+            $.ajax({
+                url: "UploadServlet",
+                type: "post",
+                cache: false,
+                data: new FormData($("#upload")[0]),
+                processData: false,
+                contentType: false,
+                success: function (result, testStatus) {
+                    if (result == "adm_success") {
+                        alert("头像上传成功！");
+                        window.location.href = 'QueryStudentByPageServlet';
+                    } else if (result == "uploadError") {
+                        alert("上传失败！图片类型有误！");
+                    } else if (result == "stu_success") {
+                        alert("头像上传成功！");
+                        window.location.href = 'QueryStudentByNameServlet';
+                    }
+                },
+                error: function (xhr, errorMessage, e) {
+                    alert("系统异常");
+                }
+            });
+        }
     </script>
 </head>
 <body>
 <%
-    String error = (String) request.getSession().getAttribute("error");
-    if (error != null) {
-        if (error.equals("uploadError")) {
-            out.print("上传文件格式可能有误！");
-        }
-    }
     Student student = (Student) request.getAttribute("students");
     request.getSession().setAttribute("imgSno", student.getSno());
 %>
-<form action="UploadServlet" method="post" enctype="multipart/form-data">
+<form enctype="multipart/form-data" id="upload">
     <%
         if (student.getSimg() != null) {
     %>
@@ -56,7 +75,7 @@
         }
     %>
     上传/修改头像：<input type="file" name="simg"/><br/>
-    <input type="submit" value="上传">
+    <input type="button" value="上传" onclick="upload()">
 </form>
 <form id="update">
     学号：<input type="text" name="sno" value="<%=student.getSno()%>" readonly="readonly"/><br/>
