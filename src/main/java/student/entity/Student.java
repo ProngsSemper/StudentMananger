@@ -1,5 +1,8 @@
 package student.entity;
 
+/**
+ * @author Prongs
+ */
 public class Student {
     private int sno;
     private String sname;

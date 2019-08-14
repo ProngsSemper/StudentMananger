@@ -2,6 +2,9 @@ package student.entity;
 
 import java.util.List;
 
+/**
+ * @author Prongs
+ */
 public class Page {
     private int currentPage;
 
@@ -52,10 +55,6 @@ public class Page {
     public int getTotalPage() {
         return totalPage;
     }
-
-//    public void setTotalPage(int totalPage) {
-//        this.totalPage = totalPage;
-//    }
 
     public List<Student> getStudents() {
         return students;

@@ -38,7 +38,7 @@ public class UpdateStudentServlet extends HttpServlet {
             String gender = request.getParameter("sgender");
             Student student = new Student(name, age, address, password, num, gender);
             IStudentService studentService = new StudentServiceImpl();
-            boolean result = studentService.updateStudentBySno(no, name, student);
+            boolean result = studentService.updateStudentBySno(no, student);
             if (result) {
                 if (adm.equals(request.getSession().getAttribute(flag))) {
                     out.write("adm_update");

@@ -7,6 +7,9 @@ import student.service.IStudentService;
 
 import java.util.List;
 
+/**
+ * @author Prongs
+ */
 public class StudentServiceImpl implements IStudentService {
     IStudentDao studentDao = new StudentDaoImpl();
 
@@ -21,7 +24,7 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public boolean updateStudentBySno(int sno, String sname, Student student) {
+    public boolean updateStudentBySno(int sno, Student student) {
         if (studentDao.isExist(sno)) {
             return studentDao.updateStudentBySno(sno, student);
         }
@@ -39,6 +42,9 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public boolean addStudent(Student student) {
+        /*
+          注册/新增用户时学号和姓名不能与他人相同
+         */
         if (!(studentDao.isExist(student.getSno()) || studentDao.isExist(student.getSname()))) {
             studentDao.addStudent(student);
             return true;

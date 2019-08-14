@@ -1,5 +1,8 @@
 package student.entity;
 
+/**
+ * @author Prongs
+ */
 public class Login {
     private String name;
     private String pwd;
