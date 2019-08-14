@@ -49,7 +49,10 @@
     学号：<input type="text" name="sno"/><br/>
     姓名：<input type="text" name="sname"/><br/>
     年龄：<input type="text" name="sage"/><br/>
-    性别：<input type="text" name="sgender"/><br/>
+    性别：<select name="sgender">
+    <option value="男">男</option>
+    <option value="女">女</option>
+</select><br/>
     电话号码：<input type="text" name="snum"/><br/>
     地址：<input type="text" name="saddress"/><br/>
     密码：<input type="password" name="spassword"/><br/>

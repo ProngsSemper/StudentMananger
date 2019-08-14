@@ -83,7 +83,23 @@
     学号：<input type="text" name="sno" value="<%=student.getSno()%>" readonly="readonly"/><br/>
     姓名：<input type="text" name="sname" value="<%=student.getSname()%>"/><br/>
     年龄：<input type="text " name="sage" value="<%=student.getSage()%>"/><br/>
-    性别：<input type="text" name="sgender" value="<%=student.getSgender()%>"/><br/>
+    性别：<select name="sgender">
+    <%
+        if (student.getSgender().equals("女")) {
+    %>
+    <option selected><%=student.getSgender()%>
+    </option>
+    <option value="男">男</option>
+    <%
+    } else {
+    %>
+    <option selected><%=student.getSgender()%>
+    </option>
+    <option value="女">女</option>
+    <%
+        }
+    %>
+</select><br/>
     电话号码：<input type="text" name="snum" value="<%=student.getSnum()%>"/><br/>
     地址：<input type="text" name="saddress" value="<%=student.getSaddress()%>"/><br/>
     密码：<input type="password" name="spassword" value="<%=student.getSpassword()%>"/><br/>
