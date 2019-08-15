@@ -36,11 +36,11 @@ public class UploadServlet extends HttpServlet {
                 List<FileItem> items = upload.parseRequest(request);
                 for (FileItem item : items) {
                     /*
-                    经过多次尝试后发现只能动态获取"StundentManager_war_exploded"文件夹所以用此路径作为一个假路径
+                    经过多次尝试后发现只能动态获取"target\StudentManager-1.0-SNAPSHOT"文件夹所以用此路径作为一个假路径
                     再利用replace方法替换成真路径放入path中
                      */
                     String fakePath = request.getSession().getServletContext().getRealPath("/");
-                    String path = fakePath.replace("out\\artifacts\\StundentManager_war_exploded", "src\\main\\webapp\\upload");
+                    String path = fakePath.replace("target\\StudentManager-1.0-SNAPSHOT", "src\\main\\webapp\\upload");
                     String fileName = item.getName();
                     /*
                     判断文件类型
