@@ -17,13 +17,13 @@ import java.io.IOException;
 @WebServlet("/QueryStudentByNameServlet")
 public class QueryStudentByNameServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sname = "sname";
-        if (request.getSession().getAttribute(sname)==null){
+        if (request.getSession().getAttribute(sname) == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         response.setContentType("text/html;charset=UTF-8");
@@ -36,7 +36,7 @@ public class QueryStudentByNameServlet extends HttpServlet {
         /*
         将student对象放入session值中方便前端获取
          */
-        request.getSession().setAttribute("student",student);
+        request.getSession().setAttribute("student", student);
         request.getRequestDispatcher("student.jsp").forward(request, response);
     }
 }

@@ -33,7 +33,7 @@ public class StudentDaoImpl implements IStudentDao {
     @Override
     public boolean updateStudentBySno(int sno, Student student) {
         String sql = "update student set sname =?,sage=?,saddress=?,spassword=?,snum=?,sgender=? where sno=? ";
-        Object[] params = {student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword(),student.getSnum(), student.getSgender(), sno};
+        Object[] params = {student.getSname(), student.getSage(), student.getSaddress(), student.getSpassword(), student.getSnum(), student.getSgender(), sno};
         return DBUtil.executeUpdate(sql, params);
     }
 

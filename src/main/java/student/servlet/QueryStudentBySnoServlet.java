@@ -30,7 +30,7 @@ public class QueryStudentBySnoServlet extends HttpServlet {
         IStudentService studentService = new StudentServiceImpl();
         Student student = studentService.queryStudentBySno(no);
         System.out.println(student);
-        request.setAttribute("students",student);
-        request.getRequestDispatcher("modify.jsp").forward(request,response);
+        request.setAttribute("students", student);
+        request.getRequestDispatcher("modify.jsp").forward(request, response);
     }
 }

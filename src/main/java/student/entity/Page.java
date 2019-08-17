@@ -41,7 +41,7 @@ public class Page {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-        this.totalPage = this.totalCount%this.pageSize==0?this.totalCount/this.pageSize:totalCount/this.pageSize+1;
+        this.totalPage = this.totalCount % this.pageSize == 0 ? this.totalCount / this.pageSize : totalCount / this.pageSize + 1;
     }
 
     public int getTotalCount() {

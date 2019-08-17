@@ -13,12 +13,12 @@ import java.sql.SQLException;
  */
 public class LoginDaoImpl implements ILoginDao {
     @Override
-    public  int login(Login login) {
+    public int login(Login login) {
         int result = -1;
         ResultSet rs = null;
         try {
             String sql = "select count(*) from student where sname='" + login.getName() + "' and spassword='" + login.getPwd() + "'";
-            rs = DBUtil.executeQuery(sql,null);
+            rs = DBUtil.executeQuery(sql, null);
             if (rs.next()) {
                 result = rs.getInt(1);
             }
@@ -30,10 +30,9 @@ public class LoginDaoImpl implements ILoginDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
-        }
-        finally {
+        } finally {
             try {
-                DBUtil.closeAll(rs,DBUtil.pstmt,DBUtil.getConnection());
+                DBUtil.closeAll(rs, DBUtil.pstmt, DBUtil.getConnection());
             } catch (SQLException | PropertyVetoException e) {
                 e.printStackTrace();
             }

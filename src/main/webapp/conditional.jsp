@@ -31,15 +31,15 @@
     %>
     <tr>
         <td>
-        <%
-            if (!(student.getSimg() == null)) {
-        %>
-        <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
-        <%
-            } else {
-                out.print("暂无头像！");
-            }
-        %>
+            <%
+                if (!(student.getSimg() == null)) {
+            %>
+            <img alt="无法显示图片" src="upload\\<%=student.getSimg()%>" height="100px" width="100px"><br/>
+            <%
+                } else {
+                    out.print("暂无头像！");
+                }
+            %>
         </td>
         <td><%=student.getSno()%>
         </td>
