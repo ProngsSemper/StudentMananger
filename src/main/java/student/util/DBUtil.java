@@ -17,7 +17,7 @@ public class DBUtil {
     public static Connection getConnection() throws SQLException, PropertyVetoException {
         pool.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/jdbcdemo");
         pool.setUser("root");
-        pool.setPassword("huxi913836");
+        pool.setPassword("******");
         pool.setDriverClass("com.mysql.jdbc.Driver");
         pool.setInitialPoolSize(10);
         pool.setMaxIdleTime(30);
